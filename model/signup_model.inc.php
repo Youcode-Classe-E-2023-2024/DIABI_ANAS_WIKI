@@ -26,7 +26,7 @@ function get_email(object $pdo, string $email) {
     return $result;
 }
 
-function set_user(object $pdo, string $email, string $pwd, string $username , string $edited_at) {
+function set_user(object $pdo, string $email, string $pwd, string $username ) {
 
     // SQL query with placeholders
     $query = "INSERT INTO users (username, pwd, email) VALUES (:username, :pwd, :email)";

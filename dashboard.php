@@ -1,0 +1,120 @@
+<?php
+
+require_once 'view\signup_view.inc.php';
+require_once 'view\login_view.inc.php';
+require_once 'model\dashboard_model.php';
+
+?>
+<?php
+require_once('includes/header.php');
+if (!isset($_SESSION["user_id"])) {
+    header("location: index.php");
+}
+?>
+
+<!--
+    colers : blue = #4A9DEC / white / black
+    font : class taillwind "italic font-mono"
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-dfJvW1RlZj5FpxJ3z9+uL4P6blgM5ZPaUwT4uFR16n1UvA6HgPQ9CExlJEPi2Jmw" crossorigin="anonymous">
+    <!--- Css File Link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-dfJvW1RlZj5FpxJ3z9+uL4P6blgM5ZPaUwT4uFR16n1UvA6HgPQ9CExlJEPi2Jmw" crossorigin="anonymous">
+    <style>
+        .carded {
+            padding: 40px;
+            border-radius: 15px;
+        }
+    </style>
+    <title>Your Title</title>
+
+
+</head>
+
+<body>
+    <?php
+    include_once 'includes/navbar.php';
+    ?>
+
+
+    <!-- sidebar -->
+    <?php
+    include_once 'includes/sidebar.php';
+    ?>
+
+
+
+    <div class="container mt-20">
+        <div class="row">
+            <!-- Users Card -->
+            <div class="col-lg-4 mb-4 rounded">
+                <div class="carded bg-primary text-white">
+                    <div class="">
+                        <h5 class="card-title">Users</h5>
+                        <p class="card-text">Total users: <?php get_users($pdo) ?></p>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addUserModal">Add User</button>
+                        <a href="tags.php" class="btn btn-danger">View Users</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 mb-4 rounded">
+                <div class="carded bg-success text-white">
+                    <div class="">
+                        <h5 class="card-title">Articles</h5>
+                        <p class="card-text">Total articles: <?php get_articles($pdo) ?></p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal">Add Article</button>
+                        <a href="tags.php" class="btn btn-danger">View Articles</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4 rounded">
+                <div class="carded bg-warning text-dark">
+                    <div class="">
+                        <h5 class="card-title">Tags</h5>
+                        <p class="card-text">Total Tags: <?php get_tags($pdo) ?></p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal">Add Tag</button>
+                        <a href="tags.php" class="btn btn-danger">View Tags</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Add Tag Modal -->
+    <?php include_once 'add_tag_modal.php'; ?>
+    <?php include_once 'add_user_modal.php'; ?>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+
+
+</html>

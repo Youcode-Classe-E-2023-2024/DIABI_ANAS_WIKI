@@ -4,8 +4,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $username = $_POST["username"];
     $pwd = $_POST["pwd"];
-    $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
-    $pwd = $hashedPassword;
+
+    
 
     try {
         require_once 'dbh.inc.php';
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (is_username_wrong($result)) {
             $errors["login_incorrect"] = "Incorrect username";
         }
-        if (!is_username_wrong($result) && !is_password_wrong($pwd, $result["pwd"])) {
+        if (is_username_wrong($result) || !is_password_wrong($pwd, $result["pwd"])) {
             $errors["login_incorrect"] = "Incorrect password";
         }
 
@@ -53,7 +53,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $_SESSION["last_regeneration"] = time();
 
-            header("location: ../index.php?login=success");
+            $userRole = $result["role"]; 
+
+            // Check the user's role and redirect accordingly
+            if ($userRole === "admin") {
+                header("location: ../dashboard.php?login=success");
+            } elseif ($userRole === "auteure") {
+                header("location: ../index.php?login=success");
+            } else {    
+                // Handle unknown or undefined roles
+                
+                header("location: ../error.php");
+            }
             $pdo = null;
             $statement = null;
 

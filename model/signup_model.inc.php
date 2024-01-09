@@ -26,22 +26,26 @@ function get_email(object $pdo, string $email) {
     return $result;
 }
 
-function set_user(object $pdo, string $email, string $pwd, string $username){
+function set_user(object $pdo, string $email, string $pwd, string $username , string $edited_at) {
 
+    // SQL query with placeholders
     $query = "INSERT INTO users (username, pwd, email) VALUES (:username, :pwd, :email)";
+
+    // Prepare the SQL statement
     $stmt = $pdo->prepare($query);
 
-    $options = [
-        'cost' => 12
-    ];
-    
-    $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT, $options);
+    // Hash the password using BCRYPT algorithm
+    $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT);
 
+    // Bind parameters to the placeholders
     $stmt->bindParam(":username", $username);
     $stmt->bindParam(":pwd", $hashedPwd);
     $stmt->bindParam(":email", $email);
-    $stmt->execute();
 
-
-
+    // Execute the prepared statement and handle errors
+    if (!$stmt->execute()) {
+        // Handle the error, e.g., log it or show a user-friendly message
+        echo "Error: " . implode(" ", $stmt->errorInfo());
+    }
 }
+

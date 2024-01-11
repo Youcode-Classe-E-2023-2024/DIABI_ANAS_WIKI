@@ -12,12 +12,12 @@ function input_data()
     ) {
         echo '    <div class="form-group">
                             <label for="registerUsername">Username:</label>
-                            <input type="text"  class="form-control" id="registerUsername" name="username" value="' . $_SESSION["input_data"]["username"] . '" >
+                            <input type="text" required class="form-control" id="registerUsername" name="username" value="' . $_SESSION["input_data"]["username"] . '" >
                         </div>';
     } else {
         echo '<div class="form-group">
                             <label for="registerUsername">Username:</label>
-                            <input type="text" class="form-control" id="registerUsername" name="username" >
+                            <input type="text" required class="form-control" id="registerUsername" name="username" >
                         </div>';
     }
     if (
@@ -28,17 +28,17 @@ function input_data()
 
         echo '    <div class="form-group">
                             <label for="registerEmail">Email:</label>
-                            <input type="email" class="form-control" id="registerEmail" name="email" value="' . $_SESSION["input_data"]["email"] . '" >
+                            <input type="email" required class="form-control" id="registerEmail" name="email" value="' . $_SESSION["input_data"]["email"] . '" >
                         </div>';
     } else {
         echo '<div class="form-group">
                             <label for="registerEmail">Email:</label>
-                            <input type="email" class="form-control" id="registerEmail" name="email" >
+                            <input type="email" required class="form-control" id="registerEmail" name="email" >
                         </div>';
     }
     echo '<div class="form-group">
                         <label for="registerPassword">Password:</label>
-                        <input type="password" class="form-control" id="registerPassword" name="pwd" >
+                        <input type="password" required class="form-control" id="registerPassword" name="pwd" >
                     </div>';
 }
 

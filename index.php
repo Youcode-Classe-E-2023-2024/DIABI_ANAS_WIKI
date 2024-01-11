@@ -1,7 +1,13 @@
+
+<?php
+require_once 'includes/config_session.inc.php';
+require_once 'model/dashboard_model.php';
+require_once 'includes/dbh.inc.php';
+
+?>
 <?php
 include_once 'includes/header.php';
 ?>
-
 <body>
     <?php
     include_once 'includes/navbar.php';
@@ -81,7 +87,58 @@ include_once 'includes/header.php';
     <?php }
     ?>
 
+<div class="container mt-5">
+            <br>
+            <br>
+            <br>
+            <?php
 
+            $Articles = get_published_articles($pdo);
+            
+
+            if (count($Articles) === 0) {
+                echo "<div class='container mt-5'>";
+                echo "<h2>No articles available</h2>";
+                echo "<p>There are currently no articles to display.</p>";
+                echo "</div>";
+            } else {
+            ?>
+                <br><br>
+                <h2 class="mb-4">Articles</h2>
+
+                <div class="row">
+                    <?php
+                    foreach ($Articles as $Article) {
+                    ?>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
+                                    <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
+                                    <p class="card-subtitle mb-2 text-muted"><?php
+                                                                                $id = $Article['category_id'];
+                                                                                $ctgrname = get_ctgr_name($pdo, $id);
+                                                                                echo 'Category: ' . $ctgrname;
+                                                                                ?></p>
+                                    <div class="content-container overflow-hidden" style="height: 95px;">
+                                        <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
+                                    </div>
+                                    <div class="btn-group mt-3" role="group">
+                                        <a href="view_Article.php?id=<?= $Article['id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+
+                                       
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
 
 
 

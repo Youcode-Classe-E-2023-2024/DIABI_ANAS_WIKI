@@ -5,34 +5,34 @@ require_once '../model/dashboard_model.php';
 
 
 if (isset($_POST["submit"])) {
-
-    $name = $_POST['tagName'];
+    // Handle form submission for adding a category
+    $name = $_POST['ctgname'];
 
     try {
-
-     
-        
-        set_tag($pdo, $name);
-        header("location: ../tags.php?add_tag=success");
-        
+        set_categorie($pdo, $name);
+        header("location: ../categories.php?add_categorie=success");
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
+
 } elseif (isset($_POST["update"])) {
+    // Handle form submission for updating a category
+    $name = $_POST['ctgname'];
+    $newName = $_POST['newctgrname'];
 
-    $name = $_POST["tagname"];
-    $newName = $_POST['newtagname'];
-    $tagData = get_tag_id($pdo, $name);
+    $ctgData = get_ctgr_id($pdo, $name);
 
-    $id = $tagData;
+   
+        $id = $ctgData;
+        update_categorie($pdo, $newName, $id);
 
-    update_tag($pdo, $newName, $id);
-    header("location: ../tags.php?update_tag=success");
+        header("location: ../categories.php?update_categorie=success");
         exit(); // Add this line to prevent further code execution after the header redirect
     
-
-}else {
+} else {
     // Redirect to dashboard if no form submitted
     header("location: ../dashboard.php");
     exit(); // Add this line to prevent further code execution after the header redirect
 }
+
+?>

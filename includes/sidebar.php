@@ -11,15 +11,18 @@
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/joomla.png" alt="joomla" />
 
                 </a>
-                <a href="blogs.php">
+                <a href="articles.php">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/news.png" alt="news" />
                 </a>
                 <a href="about.html">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/info--v1.png" alt="info--v1" />
                 </a>
+                <?php
+               if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {?>
                 <a href="dashboard.php">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/settings--v1.png" alt="settings--v1" />
                 </a>
+                <?php } ?>
                 <?php
                 if (isset($_SESSION["user_id"])) { ?>
                     <form class="form-inline my-2 my-lg-0" action="includes\logout.inc.php" method="post">

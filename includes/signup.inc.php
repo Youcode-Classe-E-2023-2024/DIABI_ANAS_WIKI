@@ -7,65 +7,58 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $pwd = $_POST["pwd"];
 
     try {
-
         require_once 'dbh.inc.php';
         require_once '../model/signup_model.inc.php';
         require_once '../controller/signup_contr.inc.php';
 
         //! Error handlers
-
         $errors = [];
 
         if (is_input_empty($username, $pwd, $email)) {
-
-            $errors["empty_input"] = "Fill in all the fields";
+            $errors[] = "Fill in all the fields";
         }
-        if (is_email_invalid($email)) {
 
-            $errors["invalid_email"] = "invalid email!!";
+        if (is_email_invalid($email)) {
+            $errors[] = "Invalid email";
         }
 
         if (is_username_taken($pdo, $username)) {
-
-            $errors["username_taken"] = "username taken!!";
+            $errors[] = "Username is taken";
         }
+
         if (is_email_registered($pdo, $email)) {
-
-            $errors["email_taken"] = "email taken!!";
+            $errors[] = "Email is already registered";
         }
-
-        require_once 'config_session.inc.php';
-
 
         if ($errors) {
-            $_SESSION["errors_signup"] = $errors;
-            $inputData = [
-                "username" => $username,
-                "email" => $email
+            $response = [
+                'success' => false,
+                'errors' => $errors
             ];
-            $_SESSION["input_data"] = $inputData;
-
-
-            header("location: ../index.php");
+            echo json_encode($response);
             die();
         }
 
+        create_user($pdo, $email, $pwd, $username);
 
-        create_user($pdo, $email, $pwd,  $username);
-
-        header("location: ../dashboard.php?signup=success");
-        $pdo = null;
-        $stmt = null;
-
-
-        //***************************************** */
-
-
+        $response = [
+            'success' => true
+        ];
+        echo json_encode($response);
 
     } catch (PDOException $e) {
-        die("Query failed: " . $e->getMessage());
+        $response = [
+            'success' => false,
+            'errors' => ['Query failed: ' . $e->getMessage()]
+        ];
+        echo json_encode($response);
     }
 } else {
-    header("location: ../index.php");
+    $response = [
+        'success' => false,
+        'errors' => ['Invalid request method']
+    ];
+    echo json_encode($response);
     die();
 }
+?>

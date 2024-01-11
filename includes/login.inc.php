@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sessionId = $newSessionId . "_" . $result["id"] ;
             session_id($sessionId);
            
+            $_SESSION["role"] = $result["role"];
             $_SESSION["user_id"] = $result["id"];
             $_SESSION["user_username"] = htmlspecialchars($result["username"]);
 
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Check the user's role and redirect accordingly
             if ($userRole === "admin") {
                 header("location: ../dashboard.php?login=success");
-            } elseif ($userRole === "auteure") {
+            } elseif ($userRole === "auteur") {
                 header("location: ../index.php?login=success");
             } else {    
                 // Handle unknown or undefined roles

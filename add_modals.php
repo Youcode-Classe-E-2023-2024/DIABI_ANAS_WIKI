@@ -144,6 +144,7 @@
                         <div class="form-group">
                             <label for="tagName">Article content:</label>
                             <input type="text" name="content" class="form-control" id="content" placeholder="Enter content">
+                            <input type="hidden" name="user_id" class="form-control" id="user_id" value="<?= $_SESSION["user_id"] ?>">
                         </div>
                         <div class="container mt-5">
                             <h2>Select a Category</h2>
@@ -159,9 +160,9 @@
                                     foreach ($ctgs as $ctg) {
                                         echo '<button type="button"  class="dropdown-item" onclick="selectCategory(' . $ctg['id'] . ', \'' . $ctg['name'] . '\')">' . $ctg['name'] . '</button>';
                                     }
-                                    ?>
+                                    ?>  
                                 </div>
-                                <input type="hidden" name="selectedCategoryId" id="selectedCategoryId">
+                                <input type="hidden" required name="selectedCategoryId" id="selectedCategoryId">
                             </div>
                         </div>
                         <br>

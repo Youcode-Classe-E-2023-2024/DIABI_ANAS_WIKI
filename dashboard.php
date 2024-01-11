@@ -3,6 +3,7 @@
 require_once 'view\signup_view.inc.php';
 require_once 'view\login_view.inc.php';
 require_once 'model\dashboard_model.php';
+require_once 'includes\dbh.inc.php';
 
 ?>
 <?php
@@ -65,48 +66,51 @@ if (!isset($_SESSION["user_id"])) {
 
 
 
-    <div class="container mt-20">
-        <div class="row">
-            <!-- Users Card -->
-            <div class="col-lg-4 mb-4 rounded">
-                <div class="carded bg-primary text-white">
-                    <div class="">
-                        <h5 class="card-title">Users</h5>
-                        <p class="card-text">Total users: <?php get_users($pdo) ?></p>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addUserModal">Add User</button>
-                        <a href="tags.php" class="btn btn-danger">View Users</a>
-                    </div>
-                </div>
+<div class="container mt-20">
+    <div class="row">
+
+        <div class="col-lg-4 mb-4 rounded">
+            <div class="carded shadow-lg bg-success text-white p-3">
+                <h5 class="card-title">Articles</h5>
+                <p class="card-text">Total articles: <?php $artclsData =  get_articles_and_count($pdo);
+                                                        $count = $artclsData['count'];
+                                                        echo $count;
+                                                        ?></p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addarticleModal"><i class="fas fa-plus"></i> Add Article</button>
+                <a href="articles.php" class="btn btn-danger"><i class="fas fa-eye"></i> View Articles</a>
             </div>
-
-
-            <div class="col-lg-4 mb-4 rounded">
-                <div class="carded bg-success text-white">
-                    <div class="">
-                        <h5 class="card-title">Articles</h5>
-                        <p class="card-text">Total articles: <?php get_articles($pdo) ?></p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal">Add Article</button>
-                        <a href="tags.php" class="btn btn-danger">View Articles</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 mb-4 rounded">
-                <div class="carded bg-warning text-dark">
-                    <div class="">
-                        <h5 class="card-title">Tags</h5>
-                        <p class="card-text">Total Tags: <?php get_tags($pdo) ?></p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal">Add Tag</button>
-                        <a href="tags.php" class="btn btn-danger">View Tags</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <div class="col-lg-4 mb-4 rounded">
+            <div class="carded shadow-lg bg-warning text-dark p-3">
+                <h5 class="card-title">Tags</h5>
+                <p class="card-text">Total Tags: <?php $tagsData = get_tags_and_count($pdo);
+                                                    $count = $tagsData['count'];
+                                                    echo $count;
+                                                    ?></p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTagModal"><i class="fas fa-plus"></i> Add Tag</button>
+                <a href="tags.php" class="btn btn-danger"><i class="fas fa-eye"></i> View Tags</a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4 rounded">
+            <div class="carded shadow-lg bg-danger text-white p-3">
+                <h5 class="card-title">Categories</h5>
+                <p class="card-text">Total categories: <?php $ctgrsData = get_categories_and_count($pdo);
+                                                            $count = $ctgrsData['count'];
+                                                            echo $count; ?></p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addcategorieModal"><i class="fas fa-plus"></i> Add Category</button>
+                <a href="categories.php" class="btn btn-warning"><i class="fas fa-eye"></i> View Categories</a>
+            </div>
+        </div>
+
     </div>
+</div>
+
     <!-- Add Tag Modal -->
-    <?php include_once 'add_tag_modal.php'; ?>
-    <?php include_once 'add_user_modal.php'; ?>
+    <?php include_once 'add_modals.php'; ?>
+
+
 
 
 

@@ -9,6 +9,9 @@ include_once 'includes/header.php';
     <?php
     include_once 'includes/sidebar.php';
     ?>
+
+
+
     <?php
 
     if (!isset($_SESSION["user_id"])) { ?>
@@ -55,7 +58,7 @@ include_once 'includes/header.php';
                             <h2 class="text-center">Registration</h2>
                         </div>
                         <div class="card-body">
-                            <form action="includes\signup.inc.php" method="POST">
+                            <form id="signupForm" method="POST">
                                 <?php
 
                                 input_data();
@@ -63,6 +66,7 @@ include_once 'includes/header.php';
                                 ?>
                                 <button type="submit" name="submit" class="btn btn-success">Register</button>
                             </form>
+                            <div id="signupErrorMessages" class="mt-3"></div>
                             <?php
 
                             check_signup_errors();
@@ -78,13 +82,39 @@ include_once 'includes/header.php';
     ?>
 
 
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 
     <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            console.log("Script is running!");
+            $("#signupForm").submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                var formData = $(this).serialize(); // Serialize the form data
+                $.ajax({
+                    type: "POST",
+                    url: "includes/signup.inc.php", // Use the correct path to your signup_ajax.php file
+                    data: formData,
+                    success: function(response) {
+                        var data = JSON.parse(response);
+                        if (data.success) {
+                            alert("Signup successful!"); // You can redirect or perform other actions here
+                        } else {
+                            // Display errors in the designated div
+                            $("#signupErrorMessages").html("<div class='alert alert-danger'>" + data.errors.join('<br>') + "</div>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

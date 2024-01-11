@@ -76,7 +76,6 @@ if (!isset($_SESSION["user_id"])) {
                                                         $count = $artclsData['count'];
                                                         echo $count;
                                                         ?></p>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addarticleModal"><i class="fas fa-plus"></i> Add Article</button>
                 <a href="articles.php" class="btn btn-danger"><i class="fas fa-eye"></i> View Articles</a>
             </div>
         </div>

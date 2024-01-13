@@ -67,6 +67,18 @@ function get_article_by_id(object $pdo, string $id)
 
     return $article;
 }
+function convert_article_created_date(string $date){
+
+    $dateTime = new DateTime($date);
+
+    // Format the date as "F j, Y" (e.g., "September 5, 2022")
+    $formattedDate = $dateTime->format("F j, Y");
+    
+    // Output the formatted date
+    echo $formattedDate;
+
+}
+
 function get_user_by_id(object $pdo, string $id)
 {
     $tableName = 'users';
@@ -146,7 +158,7 @@ function get_latest_categories($pdo, $limit = 3) {
 }
 
 
-function get_latest_articles($pdo, $limit = 3) {
+function get_latest_articles($pdo, $limit = 5) {
     $query = "SELECT * FROM articles WHERE status = 'public'
               ORDER BY createdAt DESC 
               LIMIT :limit";
@@ -376,3 +388,6 @@ function toggleArticleStatus($pdo, $id, $newStatus)
 
     header("location: ../Articles.php");
 }
+
+
+

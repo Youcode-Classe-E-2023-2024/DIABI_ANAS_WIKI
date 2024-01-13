@@ -7,7 +7,7 @@ require_once 'includes/dbh.inc.php';
 <?php
 require_once('includes/header.php');
 if (!isset($_SESSION["user_id"])) {
-    header("location: index.php");
+    header("location: nouveaute.php");
 }
 
 ?>

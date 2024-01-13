@@ -1,0 +1,26 @@
+
+@media  (max-width:1700px){
+    
+
+.blog1{
+    display: none;
+}
+}
+@media (max-width:1380px) {
+ .blog2{
+    display: none;
+ }   
+}
+@media (max-width:1060px) {
+    .blog3 {
+        display: none;
+    }
+}
+@media (max-width:680px) {
+    .blog4{
+        display: none;
+    }
+    .sider{
+        display: none;
+    }
+}

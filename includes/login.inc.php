@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($userRole === "admin") {
                 header("location: ../dashboard.php?login=success");
             } elseif ($userRole === "auteur") {
-                header("location: ../index.php?login=success");
+                header("location: ../nouveaute.php?login=success");
             } else {    
                 // Handle unknown or undefined roles
                 

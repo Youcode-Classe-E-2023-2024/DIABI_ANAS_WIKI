@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["login_incorrect"] = "Incorrect username";
         }
         if (is_username_wrong($result) || !is_password_wrong($pwd, $result["pwd"])) {
-            $errors["login_incorrect"] = "Incorrect password or username";
+            $errors["login_incorrect"] = "Incorrect informations.";
         }
 
         require_once 'config_session.inc.php';

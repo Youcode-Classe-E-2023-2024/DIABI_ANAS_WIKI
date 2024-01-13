@@ -1,12 +1,14 @@
 .error {
     color: red;
     font: 900;
-    font-size: 20px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
 }
 .success {
     color: rgb(35, 205, 40);
     font: 900;
-    font-size: 20px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
 }
  .paragraph{
     font-family:  'Montserrat', sans-serif;;

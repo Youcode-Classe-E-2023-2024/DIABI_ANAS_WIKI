@@ -40,6 +40,12 @@ if (!isset($_SESSION["user_id"])) {
             padding: 40px;
             border-radius: 15px;
         }
+        .paragraph{
+        font-family: 'Montserrat', sans-serif;
+    }
+    a:hover{
+    text-decoration: none;
+ }
     </style>
     <title>Your Title</title>
 
@@ -86,6 +92,7 @@ if (!isset($_SESSION["user_id"])) {
                     ?>
                         <div class="col-lg-4 mb-4">
                             <div class=" card shadow-lg ">
+                           
                                 <div class="<?= ($Article['status'] === 'archived') ? 'text-muted ' : ''; ?>card-body">
 
                                     <h5 class="card-title inline"><?= 'Title: ' . $Article['title']; ?></h5>
@@ -110,7 +117,12 @@ if (!isset($_SESSION["user_id"])) {
 
 
                                     </div>
-
+                                    <?php 
+                                    $auteurid = $Article['user_id'];
+                                    
+                                    $auteur = get_user_by_id($pdo, $auteurid);  ?>
+                                    <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
+                                    
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?php
                                                                                 $id = $Article['category_id'];
@@ -212,6 +224,11 @@ if (!isset($_SESSION["user_id"])) {
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
+                                    <?php 
+                                    $auteurid = $Article['user_id'];
+                                    
+                                    $auteur = get_user_by_id($pdo, $auteurid);  ?>
+                                    <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?php
                                                                                 $id = $Article['category_id'];

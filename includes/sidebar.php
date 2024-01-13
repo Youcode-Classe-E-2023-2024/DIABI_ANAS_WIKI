@@ -13,11 +13,15 @@
             <div class="flex  items-center">
                 <a href="articles.php" class="flex items-center">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-16 p-3" width="37" height="37" src="https://img.icons8.com/ios/37/news.png" alt="news" />
-                    <p class="paragraph">Your Articles</p>
-
+                    <?php
+            if(isset($_SESSION["user_id"]) && $_SESSION["role"] === "admin"){?>
+                    <p class="paragraph">All Articles</p>
+                    <?php  }else{?>
+                        <p class="paragraph">Your Articles</p>
+                        <?php }?>
                 </a>
             </div>
-            
+
             <?php
             if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") { ?>
                 <div class="flex  items-center">

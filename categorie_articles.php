@@ -11,7 +11,7 @@ require_once 'includes/dbh.inc.php';
 require_once 'includes/header.php';
 ?>
 
-<body>
+<body class="bg-gray-100">
     <?php
     require_once 'includes/navbar.php';
     require_once 'includes/sidebar.php';

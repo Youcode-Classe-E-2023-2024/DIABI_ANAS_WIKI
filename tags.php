@@ -11,7 +11,7 @@ if (!isset($_SESSION["user_id"])) {
     header("location: index.php");
 }
 ?>
-<body>
+<body class="bg-gray-100">
     <?php
     include_once 'includes/navbar.php';
     ?>

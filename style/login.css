@@ -8,9 +8,10 @@ body{
     position: relative;
     height: 100vh;
     overflow: hidden;
-    background-image: url(../imgs/colorful-shopping-bags.jpg);
+    background-image: url(../imgs/12978520_5110786.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    
 }
 form{
     width: 50%;
@@ -47,10 +48,11 @@ form{
 
 @media (min-width:1080px) {
     .flexer{
-        left: 8%;
-        top: 10%; 
+        left: 28%;
+        top: 15%; 
         margin: 30px 0  1;
         width: 800px;
+        background-color: rgba(51, 50, 110, 0.506);
        
      }
 }

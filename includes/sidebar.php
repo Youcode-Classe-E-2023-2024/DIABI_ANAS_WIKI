@@ -1,6 +1,6 @@
-<div class="h-screen flex flex-wrap w-22 left-0 fixed bg-gray-100 top-12">
+<div class="h-screen flex flex-wrap shadow-lg w-22 left-0 fixed bg-gray-100 top-12">
     <div class="h-full w-full">
-        <div class="w-full flex justify-center items-center  mt-6 mb-32  h-20 p-2">
+        <div class="w-full flex justify-center items-center  mt-4 mb-32  h-20 p-2">
             <img width="80" height="80" src="imgs/wiki.jpg" alt="b" />
         </div>
         <div class="w-full flex-col mt-22 py-8 justify-between flex  mb-auto h-full">
@@ -13,7 +13,7 @@
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-16 p-3" width="37" height="37" src="https://img.icons8.com/ios/37/news.png" alt="news" />
 
                 </a>
-                <a href="about.html" class="mb-8">
+                <a href="about.php" class="mb-8">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-16 p-3" width="37" height="37" src="https://img.icons8.com/ios/37/info--v1.png" alt="info--v1" />
 
                 </a>

@@ -14,7 +14,7 @@ if (!isset($_SESSION["user_id"])) {
 <html lang="en">
 
 
-<body>
+<body class="bg-gray-100">
     <?php
     include_once 'includes/navbar.php';
     ?>

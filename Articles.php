@@ -105,7 +105,6 @@ if (!isset($_SESSION["user_id"])) {
                                             }
                                             ?>
                                         </div>
-                                        <input type="hidden" name="selectedtagId" id="selectedtagId">
                                     </div>
                                     <div class="container mt-5">
 
@@ -127,34 +126,35 @@ if (!isset($_SESSION["user_id"])) {
                                                                                 $id = $Article['id'];
                                                                                 $tagIds = get_article_tag($pdo, $id);
                                                                                 $tags = [];
-                                                                                
+
                                                                                 if (!empty($tagIds)) {
                                                                                     foreach ($tagIds as $tagId) {
                                                                                         $tagName = get_tag_name_by_id($pdo, $tagId);
                                                                                         $tags[$tagId] = $tagName;
                                                                                     }
                                                                                 }
-                                                                                
+
                                                                                 ?>
-                                                                                
-                                                                                <p class="card-subtitle mb-2 text-muted">
-                                                                                    <?php if (!empty($tags)) : ?>
-                                                                                        <strong>Assigned Tags:</strong>
-                                                                                        <select>
-                                                                                            <?php foreach ($tags as $tagId => $tagName) : ?>
-                                                                                                <option value="<?= $tagId; ?>"><?= $tagName; ?></option>
-                                                                                            <?php endforeach; ?>
-                                                                                        </select>
-                                                                                    <?php else : ?>
-                                                                                        <em>No Assigned Tags</em>
-                                                                                    <?php endif; ?>
-                                                                                </p></p>
+
+                                    <p class="card-subtitle mb-2 text-muted">
+                                        <?php if (!empty($tags)) : ?>
+                                            <strong>Assigned Tags:</strong>
+                                            <select>
+                                                <?php foreach ($tags as $tagId => $tagName) : ?>
+                                                    <option value="<?= $tagId; ?>"><?= $tagName; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        <?php else : ?>
+                                            <em>No Assigned Tags</em>
+                                        <?php endif; ?>
+                                    </p>
+                                    </p>
                                     <div class="content-container overflow-hidden" style="height: 95px;">
                                         <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
                                     </div>
                                     <div class="btn-group mt-3" role="group">
 
-                                        <a href="view_Article.php?id=<?= $Article['id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                                    <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
 
 
                                         <?php if ($Article['status'] === 'public') { ?>
@@ -202,7 +202,7 @@ if (!isset($_SESSION["user_id"])) {
             } else {
             ?>
                 <br><br>
-                <h2 class="mb-4">Existing articles</h2>
+                <h2 class="mb-4">Your articles</h2>
 
                 <div class="row">
                     <?php
@@ -215,14 +215,48 @@ if (!isset($_SESSION["user_id"])) {
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?php
                                                                                 $id = $Article['category_id'];
-                                                                                $ctgrname = get_ctgr_name($pdo, $id);
-                                                                                echo 'Category: ' . $ctgrname;
+                                                                                if ($id != false) {
+                                                                                    $ctgrname = get_ctgr_name($pdo, $id);
+
+                                                                                    echo 'Category: ' . $ctgrname;
+                                                                                } else {
+                                                                                    echo 'No Assigned categories';
+                                                                                }
                                                                                 ?></p>
+                                    <p class="card-subtitle mb-2 text-muted"><?php
+                                                                                $id = $Article['id'];
+                                                                                $tagIds = get_article_tag($pdo, $id);
+                                                                                $tags = [];
+
+                                                                                if (!empty($tagIds)) {
+                                                                                    foreach ($tagIds as $tagId) {
+                                                                                        $tagName = get_tag_name_by_id($pdo, $tagId);
+                                                                                        $tags[$tagId] = $tagName;
+                                                                                    }
+                                                                                }
+
+                                                                                ?>
+
+                                    <p class="card-subtitle mb-2 text-muted">
+                                        <?php if (!empty($tags)) : ?>
+                                            <strong>Assigned Tags:</strong>
+                                            <select>
+                                                <?php foreach ($tags as $tagId => $tagName) : ?>
+                                                    <option value="<?= $tagId; ?>"><?= $tagName; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        <?php else : ?>
+                                            <em>No Assigned Tags</em>
+                                        <?php endif; ?>
+                                    </p>
+                                    </p>
                                     <div class="content-container overflow-hidden" style="height: 95px;">
                                         <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
                                     </div>
                                     <div class="btn-group mt-3" role="group">
-                                        <a href="view_Article.php?id=<?= $Article['id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                                    <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" onclick="setartclDetails('<?= $Article['title']; ?>', '<?= $Article['content']; ?>', '<?=$Article['category_id']; ?>', '<?=$Article['id']; ?>')" data-target="#eidtearticleModal"><i class="fas fa-plus"></i>Edit</button>
+
                                         <a href="delete_archive/archive_Article.php?del=<?= $Article['id']; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
 
                                     </div>
@@ -240,7 +274,15 @@ if (!isset($_SESSION["user_id"])) {
     <?php
     }
     ?>
-
+    <script>
+        function setartclDetails(artclTitle, artclContent, ctgrId, artclId) {
+            // Set the category name to a hidden input field in the modal form
+            document.getElementById('artclTitle').value = artclTitle;
+            document.getElementById('artclContent').value = artclContent;
+            document.getElementById('selectedCategoryId').value = ctgrId;
+            document.getElementById('artclId').value = artclId;
+        }
+    </script>
     <?php include_once 'add_modals.php'; ?>
 
     <!-- Bootstrap JS Bundle (Popper included) -->

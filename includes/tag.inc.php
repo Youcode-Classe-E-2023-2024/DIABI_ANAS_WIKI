@@ -10,11 +10,9 @@ if (isset($_POST["submit"])) {
 
     try {
 
-     
-        
+
         set_tag($pdo, $name);
         header("location: ../tags.php?add_tag=success");
-        
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
@@ -28,11 +26,16 @@ if (isset($_POST["submit"])) {
 
     update_tag($pdo, $newName, $id);
     header("location: ../tags.php?update_tag=success");
-        exit(); // Add this line to prevent further code execution after the header redirect
+    exit(); // Add this line to prevent further code execution after the header redirect
+
+
+} else {
+    $tagid = $_GET["tagid"];
+    $artclid = $_GET["artclid"];
     
 
-}else {
-    // Redirect to dashboard if no form submitted
-    header("location: ../dashboard.php");
-    exit(); // Add this line to prevent further code execution after the header redirect
+    assign_tag($pdo,  $artclid, $tagid);
+
+    header("location: ../Articles.php?assign_tag=success");
+    exit();
 }

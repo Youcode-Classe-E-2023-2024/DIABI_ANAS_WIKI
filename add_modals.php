@@ -53,7 +53,8 @@
                             <label for="tagName">Tag Name:</label>
                             <input type="text" value="<?= $tag['name']; ?>" name="newtagname" class="form-control" id="tagname" placeholder="Enter tag name">
                         </div>
-                        <input type="hidden" name="action" value="update">
+                        <input type="hidden" name="tagname" value="<?= $tag['name']; ?>">
+                        <input type="hidden" name="action" value="">
                         <button type="submit" name="update" class="btn btn-primary">Update tag</button>
                     </form>
                 </div>
@@ -114,6 +115,7 @@
                             <input type="text" value="<?= $ctg['name']; ?>" name="newctgrname" class="form-control" id="ctgname" placeholder="Enter categorie name">
                         </div>
                         <input type="hidden" name="action" value="update">
+                        <input type="hidden" name="ctgrname" value="<?= $ctg['name']; ?>">
                         <button type="submit" name="update" class="btn btn-primary">Update Category</button>
                     </form>
                 </div>

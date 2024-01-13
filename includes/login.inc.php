@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["login_incorrect"] = "Incorrect username";
         }
         if (is_username_wrong($result) || !is_password_wrong($pwd, $result["pwd"])) {
-            $errors["login_incorrect"] = "Incorrect password";
+            $errors["login_incorrect"] = "Incorrect password or username";
         }
 
         require_once 'config_session.inc.php';
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["errors_login"] = $errors;
 
         
-            header("location: ../index.php");
+            header("location: ../login_register.php");
             die();
         }
 
@@ -75,6 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Query failed: " . $e->getMessage());
     }
 } else {
-    header("Location: ../index.php");
+    header("Location: ../login_register.php");
     die();
 }

@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
 
 } elseif (isset($_POST["update"])) {
     // Handle form submission for updating a category
-    $name = $_POST['ctgname'];
+    $name = $_POST['ctgrname'];
     $newName = $_POST['newctgrname'];
 
     $ctgData = get_ctgr_id($pdo, $name);

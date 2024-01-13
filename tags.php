@@ -74,7 +74,6 @@ if (!isset($_SESSION["user_id"])) {
     function settagName(tagName) {
         // Set the category name to a hidden input field in the modal form
         document.getElementById('tagname').value = tagName;
-        document.getElementById('tagname2').value = tagName;
     }
     
     

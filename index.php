@@ -1,4 +1,3 @@
-
 <?php
 require_once 'includes/config_session.inc.php';
 require_once 'model/dashboard_model.php';
@@ -8,7 +7,84 @@ require_once 'includes/dbh.inc.php';
 <?php
 include_once 'includes/header.php';
 ?>
-<body>
+<style>
+    body{
+        box-sizing: border-box;
+    }
+    a{
+        display: inline;
+    }
+    .paragraph{
+        font-family: 'Montserrat', sans-serif;
+        display: inline;
+    }
+    .container {
+        margin-top: 100px;
+        border-radius: 20%;
+    }
+    a:hover{
+    text-decoration: none;
+ }
+    .container h1 {
+        text-align: center;
+    }
+
+    .carded {
+        height: 100%;
+        transition: 0.3s;
+    }
+
+    .carded:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
+    }
+
+    .carded:hover .yell {
+        color: #FFFF00;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .yell {
+        
+        /* Yellow color code */
+        margin-left: 5px;
+        line-height: 15px;
+    }
+
+    .card-title1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .card-title1:hover {
+        color: #fff;
+    }
+
+    .category-link {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .category-link:hover {
+        text-decoration: underline;
+    }
+
+    .view-articles-link {
+        color: #fff;
+        text-decoration: none;
+        /* Remove underline */
+    }
+
+    .view-articles-link:hover {
+        text-decoration: none;
+        color: #FFFF00;
+
+    }
+</style>
+
+<body class="bg-gray-100">
     <?php
     include_once 'includes/navbar.php';
     ?>
@@ -18,160 +94,233 @@ include_once 'includes/header.php';
 
 
 
-    <?php
-
-    if (!isset($_SESSION["user_id"])) { ?>
-
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <!-- Login Form -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="text-center">Login</h2>
-                        </div>
-                        <div class="card-body">
-
-
-                            <form action="includes/login.inc.php" method="POST">
-                                <div class="form-group">
-                                    <label for="loginEmail">User Name:</label>
-                                    <input type="text" class="form-control" id="loginusername" name="username">
-                                </div>
-                                <div class="form-group">
-                                    <label for="loginPassword">Password:</label>
-                                    <input type="password" class="form-control" id="loginPassword" name="pwd">
-                                </div>
-                                <button type="submit" name="submit" class="btn btn-primary">Login</button>
-                            </form>
 
 
 
-
-                            <?php
-
-                            check_login_errors();
-
-                            ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <!-- Signup Form -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="text-center">Registration</h2>
-                        </div>
-                        <div class="card-body">
-                            <form id="signupForm" method="POST">
-                                <?php
-
-                                input_data();
-
-                                ?>
-                                <button type="submit" name="submit" class="btn btn-success">Register</button>
-                            </form>
-                            <div id="signupErrorMessages" class="mt-3"></div>
-                            <?php
-
-                            check_signup_errors();
-
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <?php }
-    ?>
-
-<div class="container mt-5">
-            <br>
-            <br>
-            <br>
+    <div class="container">
+        <h1>Latest Categories:</h1>
+        <div class="row">
             <?php
+            // Assuming get_latest_categories returns an array of the latest categories
+            $latestCategories = get_latest_categories($pdo, 3);
 
-            $Articles = get_published_articles($pdo);
-            
-
-            if (count($Articles) === 0) {
-                echo "<div class='container mt-5'>";
-                echo "<h2>No articles available</h2>";
-                echo "<p>There are currently no articles to display.</p>";
-                echo "</div>";
-            } else {
+            foreach ($latestCategories as $category) {
             ?>
-                <br><br>
-                <h2 class="mb-4">Articles</h2>
+                <div class="col-lg-4 mb-4 ">
+                    <a class="view-articles-link" href="categorie_articles.php?ctgr=<?php echo $category['id']; ?>">
 
-                <div class="row">
-                    <?php
-                    foreach ($Articles as $Article) {
-                    ?>
-                        <div class="col-lg-4 mb-4">
-                            <div class="card shadow-lg">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
-                                    <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
-                                    <p class="card-subtitle mb-2 text-muted"><?php
-                                                                                $id = $Article['category_id'];
-                                                                                $ctgrname = get_ctgr_name($pdo, $id);
-                                                                                echo 'Category: ' . $ctgrname;
-                                                                                ?></p>
-                                    <div class="content-container overflow-hidden" style="height: 95px;">
-                                        <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
-                                    </div>
-                                    <div class="btn-group mt-3" role="group">
-                                        <a href="view_Article.php?id=<?= $Article['id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                        <div class="carded shadow-lg rounded-lg bg-danger text-white p-3">
+                            <h5 class="card-title1 mb-4">
+                                <i class="fas fa-folder"></i>
+                                <?php echo $category['name']; ?>
+                            </h5>
 
-                                       
-
-                                    </div>
-                                </div>
+                            <div class="flex">
+                                <i class="yell fas fa-newspaper"></i>
+                                <p class="yell">View Related Articles</p>
                             </div>
+                            <!-- Add any additional information you want to display for each category -->
                         </div>
-                    <?php
-                    }
-                    ?>
+                    </a>
                 </div>
             <?php
             }
             ?>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <br>
+        <br>
+        <br>
+        <?php
+
+        $Articles = get_published_articles($pdo);
+        $latestArticles = get_latest_articles($pdo);
+
+        if (count($latestArticles) === 0) {
+            echo "<div class='container mt-5'>";
+            echo "<h2>No articles available</h2>";
+            echo "<p>There are currently no articles to display.</p>";
+            echo "</div>";
+        } else {
+
+        ?>
+            <br><br>
+            <h2 class="mb-4"> Latest Articles</h2>
+
+            <div class="row">
+                <?php
+                foreach ($latestArticles as $Article) {
+                ?>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
+                                <p class="card-subtitle mb-2 text-muted"><?php
+                                                                            $id = $Article['category_id'];
+                                                                            if ($id != false) {
+                                                                                $ctgrname = get_ctgr_name($pdo, $id);
+
+                                                                                echo 'Category: ' . $ctgrname;
+                                                                            } else {
+                                                                                echo 'No Assigned categories';
+                                                                            }
+                                                                            ?></p>
+                                <p class="card-subtitle mb-2 text-muted"><?php
+                                                                            $id = $Article['id'];
+                                                                            $tagIds = get_article_tag($pdo, $id);
+                                                                            $tags = [];
+
+                                                                            if (!empty($tagIds)) {
+                                                                                foreach ($tagIds as $tagId) {
+                                                                                    $tagName = get_tag_name_by_id($pdo, $tagId);
+                                                                                    $tags[$tagId] = $tagName;
+                                                                                }
+                                                                            }
+
+                                                                            ?>
+
+                                <p class="card-subtitle mb-2 text-muted">
+                                    <?php if (!empty($tags)) : ?>
+                                        <strong>Assigned Tags:</strong>
+                                        <select>
+                                            <?php foreach ($tags as $tagId => $tagName) : ?>
+                                                <option value="<?= $tagId; ?>"><?= $tagName; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    <?php else : ?>
+                                        <em>No Assigned Tags</em>
+                                    <?php endif; ?>
+                                </p>
+                                </p>
+                                <div class="content-container overflow-hidden" style="height: 95px;">
+                                    <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
+                                </div>
+                                <div class="btn-group mt-3" role="group">
+                                    <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        <?php
+        }
+        ?>
+        <?php
+        if (count($Articles) === 0) {
+            echo "<div class='container mt-5'>";
+            echo "<h2>No articles available</h2>";
+            echo "<p>There are currently no articles to display.</p>";
+            echo "</div>";
+        } else {
+        ?>
+            <br><br>
+            <h2 class="mb-4">Articles</h2>
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <div class="row">
+                <?php
+                foreach ($Articles as $Article) {
+                ?>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
+                                <p class="card-subtitle mb-2 text-muted"><?php
+                                                                            $id = $Article['category_id'];
+                                                                            if ($id != false) {
+                                                                                $ctgrname = get_ctgr_name($pdo, $id);
 
-    <script>
-        $(document).ready(function() {
-            console.log("Script is running!");
-            $("#signupForm").submit(function(event) {
-                event.preventDefault(); // Prevent the default form submission
-                var formData = $(this).serialize(); // Serialize the form data
-                $.ajax({
-                    type: "POST",
-                    url: "includes/signup.inc.php", // Use the correct path to your signup_ajax.php file
-                    data: formData,
-                    success: function(response) {
-                        var data = JSON.parse(response);
-                        if (data.success) {
-                            alert("Signup successful!"); // You can redirect or perform other actions here
-                        } else {
-                            // Display errors in the designated div
-                            $("#signupErrorMessages").html("<div class='alert alert-danger'>" + data.errors.join('<br>') + "</div>");
+                                                                                echo 'Category: ' . $ctgrname;
+                                                                            } else {
+                                                                                echo 'No Assigned categories';
+                                                                            }
+                                                                            ?></p>
+                                <p class="card-subtitle mb-2 text-muted"><?php
+                                                                            $id = $Article['id'];
+                                                                            $tagIds = get_article_tag($pdo, $id);
+                                                                            $tags = [];
+
+                                                                            if (!empty($tagIds)) {
+                                                                                foreach ($tagIds as $tagId) {
+                                                                                    $tagName = get_tag_name_by_id($pdo, $tagId);
+                                                                                    $tags[$tagId] = $tagName;
+                                                                                }
+                                                                            }
+
+                                                                            ?>
+
+                                <p class="card-subtitle mb-2 text-muted">
+                                    <?php if (!empty($tags)) : ?>
+                                        <strong>Assigned Tags:</strong>
+                                        <select>
+                                            <?php foreach ($tags as $tagId => $tagName) : ?>
+                                                <option value="<?= $tagId; ?>"><?= $tagName; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    <?php else : ?>
+                                        <em>No Assigned Tags</em>
+                                    <?php endif; ?>
+                                </p>
+                                </p>
+                                <div class="content-container overflow-hidden" style="height: 95px;">
+                                    <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
+                                </div>
+                                <div class="btn-group mt-3" role="group">
+                                    <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        <?php
+        }
+        ?>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="script.js"></script>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                console.log("Script is running!");
+                $("#signupForm").submit(function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+                    var formData = $(this).serialize(); // Serialize the form data
+                    $.ajax({
+                        type: "POST",
+                        url: "includes/signup.inc.php",
+                        data: formData,
+                        success: function(response) {
+                            var data = JSON.parse(response);
+                            if (data.success) {
+                                alert("Signup successful!");
+                            } else {
+                                // Display errors in the designated div
+                                $("#signupErrorMessages").html("<div class='alert alert-danger'>" + data.errors.join('<br>') + "</div>");
+                            }
                         }
-                    }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>

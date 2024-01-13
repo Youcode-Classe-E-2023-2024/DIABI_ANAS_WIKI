@@ -43,17 +43,25 @@ if (!isset($_SESSION["user_id"])) {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-dfJvW1RlZj5FpxJ3z9+uL4P6blgM5ZPaUwT4uFR16n1UvA6HgPQ9CExlJEPi2Jmw" crossorigin="anonymous">
     <style>
+        
         .carded {
             padding: 40px;
             border-radius: 15px;
         }
+        .paragraph{
+        font-family: 'Montserrat', sans-serif;
+    }
+    a:hover{
+    text-decoration: none;
+ }
+        
     </style>
     <title>Your Title</title>
 
 
 </head>
 
-<body>
+<body class="bg-gray-100">
     <?php
     include_once 'includes/navbar.php';
     ?>
@@ -66,12 +74,13 @@ if (!isset($_SESSION["user_id"])) {
 
 
 
-<div class="container mt-20">
+
+<div class="container  mt-20">
     <div class="row">
 
         <div class="col-lg-4 mb-4 rounded">
-            <div class="carded shadow-lg bg-success text-white p-3">
-                <h5 class="card-title">Articles</h5>
+            <div class="carded shadow-lg bg-light text-dark p-3">
+            <h5 class="card-title"><i class="fas fa-newspaper"></i> Articles</h5>
                 <p class="card-text">Total articles: <?php $artclsData =  get_articles_and_count($pdo);
                                                         $count = $artclsData['count'];
                                                         echo $count;
@@ -81,9 +90,9 @@ if (!isset($_SESSION["user_id"])) {
         </div>
 
         <div class="col-lg-4 mb-4 rounded">
-            <div class="carded shadow-lg bg-warning text-dark p-3">
-                <h5 class="card-title">Tags</h5>
-                <p class="card-text">Total Tags: <?php $tagsData = get_tags_and_count($pdo);
+            <div class="carded shadow-lg bg-light text-dark p-3">
+            <h5 class="card-title"><i class="fas fa-tags"></i> Tags</h5>
+                    <p class="card-text">Total Tags: <?php $tagsData = get_tags_and_count($pdo);
                                                     $count = $tagsData['count'];
                                                     echo $count;
                                                     ?></p>
@@ -93,8 +102,8 @@ if (!isset($_SESSION["user_id"])) {
         </div>
 
         <div class="col-lg-4 mb-4 rounded">
-            <div class="carded shadow-lg bg-danger text-white p-3">
-                <h5 class="card-title">Categories</h5>
+            <div class="carded shadow-lg bg-light text-dark p-3">
+            <h5 class="card-title"><i class="fas fa-folder"></i> Categories</h5>
                 <p class="card-text">Total categories: <?php $ctgrsData = get_categories_and_count($pdo);
                                                             $count = $ctgrsData['count'];
                                                             echo $count; ?></p>

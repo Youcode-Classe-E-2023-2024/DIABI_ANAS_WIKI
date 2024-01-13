@@ -144,7 +144,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tagName">Article content:</label>
-                            <input type="text" name="content" class="form-control" id="content" placeholder="Enter content">
+                            <textarea name="content" class="form-control" id="content" placeholder="Enter content"></textarea>
                             <input type="hidden" name="user_id" class="form-control" id="user_id" value="<?= $_SESSION["user_id"] ?>">
                         </div>
                         <div class="container mt-5">
@@ -161,7 +161,7 @@
                                     foreach ($ctgs as $ctg) {
                                         echo '<button type="button"  class="dropdown-item" onclick="selectCategory(' . $ctg['id'] . ', \'' . $ctg['name'] . '\')">' . $ctg['name'] . '</button>';
                                     }
-                                    ?>  
+                                    ?>
                                 </div>
                                 <input type="hidden" required name="selectedCategoryId" id="selectedCategoryId">
                             </div>
@@ -177,8 +177,8 @@
         </div>
     </div>
 
- <!-- Content for Update article Page -->
- <div class="modal fade" id="eidtearticleModal" tabindex="-1" role="dialog" aria-labelledby="eidtearticleModalLabel" aria-hidden="true">
+    <!-- Content for Update article Page -->
+    <div class="modal fade" id="eidtearticleModal" tabindex="-1" role="dialog" aria-labelledby="eidtearticleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -195,7 +195,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tagName">Article content:</label>
-                            <input type="text" name="content" class="form-control" id="artclContent" placeholder="Enter content">
+                            <textarea type="text" name="content" class="form-control" id="artclContent" placeholder="Enter content"></textarea>
                             <input type="hidden" name="artclId" class="form-control" id="artclId">
                         </div>
                         <div class="container mt-5">
@@ -212,7 +212,7 @@
                                     foreach ($ctgs as $ctg) {
                                         echo '<button type="button"  class="dropdown-item" onclick="selectCategory(' . $ctg['id'] . ')">' . $ctg['name'] . '</button>';
                                     }
-                                    ?>  
+                                    ?>
                                 </div>
                                 <input type="hidden" required name="selectedCategoryId" id="selectedCategoryId1">
                             </div>

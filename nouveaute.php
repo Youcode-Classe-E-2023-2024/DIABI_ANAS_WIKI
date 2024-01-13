@@ -40,8 +40,7 @@ include_once 'includes/header.php';
     <div class="sider h-screen z-50 bg-white mt-14 flex-wrap w-16 border-2 fixed top-0 border-gray-300 left-0 ">
         <div class="h-full w-full">
             <div class="w-full flex border-b-2 items-center h-20 p-2">
-                <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/4A9DEC/b.png" alt="b" />
-            </div>
+            <img width="80" height="80" src="imgs/wiki.jpg" alt="b" />            </div>
             <div class="w-full flex-col items-center py-8 justify-between flex mb-auto h-3/5 ">
 
                 <a href="nouveaute.php">

@@ -8,23 +8,30 @@ require_once 'includes/dbh.inc.php';
 include_once 'includes/header.php';
 ?>
 <style>
-    body{
+    body {
         box-sizing: border-box;
+        background-image: url(imgs/Theimage1.png);
+            background-size: 100%;
     }
-    a{
+
+    a {
         display: inline;
     }
-    .paragraph{
+
+    .paragraph {
         font-family: 'Montserrat', sans-serif;
         display: inline;
     }
+
     .container {
         margin-top: 100px;
         border-radius: 20%;
     }
-    a:hover{
-    text-decoration: none;
- }
+
+    a:hover {
+        text-decoration: none;
+    }
+
     .container h1 {
         text-align: center;
     }
@@ -35,7 +42,7 @@ include_once 'includes/header.php';
     }
 
     .carded:hover {
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 
     .carded:hover .yell {
@@ -46,8 +53,13 @@ include_once 'includes/header.php';
         display: flex;
     }
 
+    .shaded {
+        text-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+    }
+
     .yell {
-        
+
         /* Yellow color code */
         margin-left: 5px;
         line-height: 15px;
@@ -98,7 +110,7 @@ include_once 'includes/header.php';
 
 
     <div class="container">
-        <h1>Latest Categories:</h1>
+
         <div class="row">
             <?php
             // Assuming get_latest_categories returns an array of the latest categories
@@ -140,29 +152,28 @@ include_once 'includes/header.php';
 
         if (count($latestArticles) === 0) {
             echo "<div class='container mt-5'>";
-            echo "<h2>No articles available</h2>";
-            echo "<p>There are currently no articles to display.</p>";
+            echo "<h2 class='mb-4 display-4 font-weight-bold shaded  d-inline-block px-3 py-2 rounded'>No articles available</h2>";
+            echo "<p class='text-white'>There are currently no articles to display.</p>";
             echo "</div>";
         } else {
 
         ?>
             <br><br>
-            <h2 class="mb-4"> Latest Articles</h2>
-
+            <h2 class="mb-4 display-4 font-weight-bold shaded  d-inline-block px-3 py-2 rounded">Latest Articles</h2>
             <div class="row">
                 <?php
                 foreach ($latestArticles as $Article) {
                 ?>
                     <div class="col-lg-4 mb-4">
-                        <div class="card shadow-lg">
+                        <div class="card shadow-lg  transparent-card">
                             <div class="card-body">
                                 <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
-                                <?php 
-                                    $auteurid = $Article['user_id'];
-                                    
-                                    $auteur = get_user_by_id($pdo, $auteurid);  ?>
-                                    <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
-                                    
+                                <?php
+                                $auteurid = $Article['user_id'];
+
+                                $auteur = get_user_by_id($pdo, $auteurid);  ?>
+                                <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
+
                                 <p class="card-subtitle mb-2 text-muted"><?php
                                                                             $id = $Article['category_id'];
                                                                             if ($id != false) {
@@ -181,7 +192,10 @@ include_once 'includes/header.php';
                                                                             if (!empty($tagIds)) {
                                                                                 foreach ($tagIds as $tagId) {
                                                                                     $tagName = get_tag_name_by_id($pdo, $tagId);
-                                                                                    $tags[$tagId] = $tagName;
+
+                                                                                    if ($tagName !== false) {
+                                                                                        $tags[$tagId] = $tagName;
+                                                                                    } 
                                                                                 }
                                                                             }
 
@@ -220,15 +234,11 @@ include_once 'includes/header.php';
         }
         ?>
         <?php
-        if (count($Articles) === 0) {
-            echo "<div class='container mt-5'>";
-            echo "<h2>No articles available</h2>";
-            echo "<p>There are currently no articles to display.</p>";
-            echo "</div>";
-        } else {
+        if (count($Articles) > 0) {
+            
         ?>
             <br><br>
-            <h2 class="mb-4">Articles</h2>
+            <h2 class="mb-4 display-4 font-weight-bold shaded   d-inline-block px-3 py-2 rounded">articles:</h2>
 
             <div class="row">
                 <?php
@@ -237,12 +247,12 @@ include_once 'includes/header.php';
                     <div class="col-lg-4 mb-4">
                         <div class="card shadow-lg">
                             <div class="card-body">
-                            <?php 
-                                    $auteurid = $Article['user_id'];
-                                    
-                                    $auteur = get_user_by_id($pdo, $auteurid);  ?>
-                                    <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
-                                    
+                                <?php
+                                $auteurid = $Article['user_id'];
+
+                                $auteur = get_user_by_id($pdo, $auteurid);  ?>
+                                <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
+
                                 <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
                                 <p class="card-subtitle mb-2 text-muted"><?php
                                                                             $id = $Article['category_id'];

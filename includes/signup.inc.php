@@ -40,9 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         create_user($pdo, $email, $pwd, $username);
-
+        $success = 'Signup SUCCESSFULL';
         $response = [
-            'success' => true
+            'success' => $success
         ];
         echo json_encode($response);
 

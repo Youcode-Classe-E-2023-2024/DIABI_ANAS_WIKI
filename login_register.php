@@ -6,7 +6,17 @@ include("includes/header.php");
 
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+    .swal-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the last value for opacity */
+}
+</style>
 </head>
 
 <body>
@@ -15,6 +25,8 @@ include("includes/header.php");
         header("location: index.php");
     }
     ?>
+
+
 
     <!--!!!!!!!! Size modufication later-->
     <!-- content -->
@@ -38,10 +50,10 @@ include("includes/header.php");
                     <!-- !  Sign in Form-->
 
                     <form class="h-fit flex flex-col justify-center" id="loginForm" action="includes/login.inc.php" method="POST">
-                        <input type="text" id="loginusername" name="username" placeholder="User Name" class="border-b-2 w-[100%] mb-6 outline-none text-black bg-transparent placeholder-white" required />
+                        <input type="text" id="loginusername" name="username" placeholder="User Name" class="border-b-2 w-[100%] mb-6 outline-none text-yellow-400 bg-transparent placeholder-white" required />
                         <span id="text"></span>
 
-                        <input type="password" id="password" name="pwd" placeholder="Password" class="border-b-2 w-[100%] outline-none text-black bg-transparent placeholder-white" required />
+                        <input type="password" id="password" name="pwd" placeholder="Password" class="border-b-2 w-[100%] outline-none text-yellow-400 bg-transparent placeholder-white" required />
                         <div id="loginErrorMessages"></div>
                         <?php check_login_errors()  ?>
 
@@ -54,7 +66,7 @@ include("includes/header.php");
                     <!-- !!!!!!!!!!!!!!!!-->
                 </div>
 
-                <div id="loger" class="loger absolute py-36 h-[480px] w-[70%] flex justify-evenly bg-sky-500">
+                <div id="loger" class="loger absolute py-36 h-[490px] w-[70%] flex justify-evenly bg-sky-500">
                     <div id="cont" class="cont absolute flex flex-col justify-evenly items-center">
                         <h1 class="font-bold mb-5 text-[25px] text-black">
                             welcome, friend !
@@ -82,12 +94,12 @@ include("includes/header.php");
                     <!-- ! Create Acount Form-->
 
                     <form class="h-fit flex flex-col justify-center" id="registrationForm" method="POST">
-                        <input type="text" id="username" name="username" placeholder="User Name" class="border-b-2 w-[100%] mb-6 mt-12 outline-none text-black bg-transparent placeholder-white" required />
+                        <input type="text" id="username" name="username" placeholder="User Name" class="border-b-2 w-[100%] mb-6 mt-12  outline-none text-yellow-400 bg-transparent placeholder-white" required />
 
-                        <input type="email" id="email1" name="email" placeholder="Email" oninput="validation()" class="border-b-2 w-[100%] mb-6 outline-none text-black bg-transparent placeholder-white" required />
-                        <span id="text1"></span>
+                        <input type="email" id="email1" name="email" placeholder="Email" oninput="validation()" class="border-b-2 w-[100%]  outline-none text-yellow-400 bg-transparent placeholder-white" required />
+                        <span id="text1" class="mb-6"></span>
 
-                        <input type="password" id="registrationPassword" name="pwd" placeholder="Password" class="border-b-2 w-[100%] outline-none text-black bg-transparent placeholder-white" required />
+                        <input type="password" id="registrationPassword" name="pwd" placeholder="Password" class="border-b-2 w-[100%] outline-none text-yellow-400 bg-transparent placeholder-white" required />
 
                         <input type="submit" value="Sign-Up" class="font-bold cursor-pointer text-white my-5 mx-auto bg-sky-400 px-16 py-3 rounded-[30px]" />
                     </form>
@@ -97,6 +109,10 @@ include("includes/header.php");
             </div>
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Include SweetAlert2 JS -->
 
 
 
@@ -111,12 +127,24 @@ include("includes/header.php");
                     url: "includes/signup.inc.php",
                     data: formData,
                     success: function(response) {
+                        console.log(response);
                         var data = JSON.parse(response);
                         if (data.success) {
-                            alert("Signup successful!");
+                            // Show SweetAlert2 success message
+                            Swal.fire({
+                                title: "Success",
+                                text: data.success,
+                                confirmButtonColor: '#34D399',
+                                icon: "success",
+                            });
                         } else {
                             // Display errors in the designated div
-                            $("#signupErrorMessages").html("<div class='alert alert-danger'>" + data.errors.join('<br>') + "</div>");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                html: data.errors.join('<br>'),
+                                confirmButtonColor: '#34D399',
+                            });
                         }
                     }
                 });
@@ -148,9 +176,10 @@ include("includes/header.php");
             } else {
                 form.classList.remove("valid");
                 form.classList.add("invalid");
-                text.innerHTML = "Please enter valid Email Address";
+                text.innerHTML = "invalid Email Address";
                 text.style.color = "#ff0000";
                 text.style.fontWeight = "700";
+                text.style.fontSize = "15px";
             }
         }
     </script>

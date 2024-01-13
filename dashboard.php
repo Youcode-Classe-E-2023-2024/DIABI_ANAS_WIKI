@@ -43,7 +43,10 @@ if (!isset($_SESSION["user_id"])) {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-dfJvW1RlZj5FpxJ3z9+uL4P6blgM5ZPaUwT4uFR16n1UvA6HgPQ9CExlJEPi2Jmw" crossorigin="anonymous">
     <style>
-        
+        body{
+            background-image: url(imgs/5540822.jpg);
+            
+        }
         .carded {
             padding: 40px;
             border-radius: 15px;

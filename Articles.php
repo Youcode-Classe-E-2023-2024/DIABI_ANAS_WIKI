@@ -26,6 +26,10 @@ if (!isset($_SESSION["user_id"])) {
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <!-- Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -36,16 +40,22 @@ if (!isset($_SESSION["user_id"])) {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-dfJvW1RlZj5FpxJ3z9+uL4P6blgM5ZPaUwT4uFR16n1UvA6HgPQ9CExlJEPi2Jmw" crossorigin="anonymous">
     <style>
+        body{
+            background-image: url(imgs/Theimage.jpg);
+            background-size: 100%;
+        }
         .carded {
             padding: 40px;
             border-radius: 15px;
         }
-        .paragraph{
-        font-family: 'Montserrat', sans-serif;
-    }
-    a:hover{
-    text-decoration: none;
- }
+
+        .paragraph {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
     </style>
     <title>Your Title</title>
 
@@ -92,7 +102,7 @@ if (!isset($_SESSION["user_id"])) {
                     ?>
                         <div class="col-lg-4 mb-4">
                             <div class=" card shadow-lg ">
-                           
+
                                 <div class="<?= ($Article['status'] === 'archived') ? 'text-muted ' : ''; ?>card-body">
 
                                     <h5 class="card-title inline"><?= 'Title: ' . $Article['title']; ?></h5>
@@ -117,12 +127,12 @@ if (!isset($_SESSION["user_id"])) {
 
 
                                     </div>
-                                    <?php 
+                                    <?php
                                     $auteurid = $Article['user_id'];
-                                    
+
                                     $auteur = get_user_by_id($pdo, $auteurid);  ?>
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
-                                    
+
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?php
                                                                                 $id = $Article['category_id'];
@@ -166,16 +176,16 @@ if (!isset($_SESSION["user_id"])) {
                                     </div>
                                     <div class="btn-group mt-3" role="group">
 
-                                    <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                                        <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
 
 
                                         <?php if ($Article['status'] === 'public') { ?>
-                                            <a href="delete_archive/archive_Article.php?id=<?= $Article['id']; ?>&newstat=<?= 'archived'; ?>" class="btn btn-danger">
+                                            <a href="#" class="btn btn-danger" onclick="confirmarchive(<?= $Article['id']; ?>, 'archived')">
                                                 <i class="fas fa-archive"></i> Archive
                                             </a>
                                         <?php } else { ?>
-                                            <a href="delete_archive/archive_Article.php?id=<?= $Article['id']; ?>&newstat=<?= 'public'; ?>" class="btn btn-info">
-                                                <i class="fas fa-archive"></i> publier
+                                            <a href="#" class="btn btn-info" onclick="confirmarchive(<?= $Article['id']; ?>, 'public')">
+                                                <i class="fas fa-archive"></i> Publier
                                             </a> <?php } ?>
 
                                     </div>
@@ -224,9 +234,9 @@ if (!isset($_SESSION["user_id"])) {
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= 'Title: ' . $Article['title']; ?></h5>
-                                    <?php 
+                                    <?php
                                     $auteurid = $Article['user_id'];
-                                    
+
                                     $auteur = get_user_by_id($pdo, $auteurid);  ?>
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?= 'Status: ' . $Article['status']; ?></p>
@@ -271,11 +281,12 @@ if (!isset($_SESSION["user_id"])) {
                                         <p class="card-text"><?= '<h6>Content:</h6>' . $Article['content']; ?></p>
                                     </div>
                                     <div class="btn-group mt-3" role="group">
-                                    <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" onclick="setartclDetails('<?= $Article['title']; ?>', '<?= $Article['content']; ?>', '<?=$Article['category_id']; ?>', '<?=$Article['id']; ?>')" data-target="#eidtearticleModal"><i class="fas fa-plus"></i>Edit</button>
+                                        <a href="Article_details.php?id=<?php echo $Article['id']; ?>&artclctgr=<?php echo urlencode($ctgrname); ?>&auteurid=<?php echo $Article['user_id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" onclick="setartclDetails('<?= $Article['title']; ?>', '<?= $Article['content']; ?>', '<?= $Article['category_id']; ?>', '<?= $Article['id']; ?>')" data-target="#eidtearticleModal"><i class="fas fa-plus"></i>Edit</button>
 
-                                        <a href="delete_archive/archive_Article.php?del=<?= $Article['id']; ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
-
+                                        <a href="#" class="btn btn-danger" onclick="confirmDelete(<?= $Article['id']; ?>)">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -306,7 +317,89 @@ if (!isset($_SESSION["user_id"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 </body>
 
+<script>
+    function confirmDelete(articleId) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                }).then(() => {
+                    // If confirmed, redirect to the delete URL
+                    window.location.href = "delete_archive/archive_Article.php?del=" + articleId
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Your article is safe :)",
+                    icon: "error"
+                });
+            }
+        });
+    }
+</script>
+
+
+
+<script>
+    function confirmarchive(artclId, status) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Deleted!",
+                    text: "Status Changed!!.",
+                    icon: "success"
+                }).then(() => {
+                    window.location.href = "delete_archive/archive_Article.php?id=" + artclId + "&status=" + status;
+                });
+
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
+                    text: "Your Article is safe :)",
+                    icon: "error"
+                });
+            }
+        });
+    }
+</script>
 
 </html>

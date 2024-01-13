@@ -219,9 +219,13 @@ function get_tag_name_by_id(object $pdo, string $id)
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    $tagid = $stmt->fetch(PDO::FETCH_ASSOC);
+    $tagname = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(empty($tagname)) {
+        return false;
+    }else{
 
-    return $tagid['name'];
+    return $tagname['name'];
+}
 }
 
 

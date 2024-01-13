@@ -3,18 +3,16 @@
    include("../includes/dbh.inc.php");
    include("../model/dashboard_model.php");
 
-   if (isset($_GET["id"]) && isset( $_GET["newstat"])) {
+   if (isset($_GET["id"]) && isset( $_GET["status"])) {
 
-      $id = $_GET["id"];
-      $stat = $_GET["newstat"];
-      
-      
-      toggleArticleStatus($pdo, $id, $stat);
+    $id = $_GET["id"];
+    $stat = $_GET["status"];
+   
+    toggleArticleStatus($pdo, $id, $stat);
 
-
-  } elseif (isset($_GET["pub"])) {
-      $id = $_GET["pub"];
-      toggleArticleStatus($pdo, $id, $stat);
+    header("location: ../articles.php");
+  
+     
   } elseif (isset($_GET["del"])) {
   
    $id = $_GET["del"];
@@ -27,4 +25,7 @@
    
 
 
-}  
+}  else{
+
+    echo 'wtf';
+}

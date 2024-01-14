@@ -33,21 +33,25 @@ include_once 'includes/header.php';
             -webkit-line-clamp: 5;
             /* Number of lines to show */
         }
-        #searchInput{
 
+        #searchInput:hover {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-            transition:ease-in-out 0.3s;
+            transition: ease-in-out 0.3s;
+
+
         }
-        #searchInput:hover{
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-        
-        
-        
-        }
-        .blog:hover{
+        #searchInput1:hover {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            transition:ease-in-out 0.3s;
+
+            transition: ease-in-out 0.3s;
+
+
+        }
+
+        .blog:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transition: ease-in-out 0.3s;
         }
 
         body {
@@ -169,8 +173,8 @@ include_once 'includes/header.php';
     <!--************************************-->
 
     <div class="flex w-full mt-6">
-        
-    <div class="relative flex w-full bg-gray-100  flex-col">
+
+        <div class="relative flex w-full bg-gray-100  flex-col">
             <header class="pointer-events-none relative z-50 flex flex-none flex-col" style="height:var(--header-height);margin-bottom:var(--header-mb)">
                 <div class="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"></div>
                 <div class="sm:px-8 top-0 order-last -mb-3 pt-3" style="position:var(--header-position)">
@@ -298,7 +302,7 @@ include_once 'includes/header.php';
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                         </svg>
                                     </div>
-                                    <input type="search" id="searchInput" class="block w-1/4 px-6 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Articles..." required>
+                                    <input type="search" id="searchInput" class="block w-1/2 px-6 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Categorie..." required>
                                 </div>
 
 
@@ -348,13 +352,13 @@ include_once 'includes/header.php';
                                             <div class="mt-6 flex"><input type="email" placeholder="Email address" aria-label="Email address" required="" class="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"><button class="inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 ml-4 flex-none" type="submit">Join</button></div>
                                         </form>
                                         <div class="relative flex mb-6  items-center">
-                                    <div class="absolute inset-y-0 flex  items-center  pointer-events-none">
-                                        <svg class="w-4 h-4 m-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                        </svg>
-                                    </div>
-                                    <input type="search" id="searchInput1" class="block w-1/2 px-6 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Categorie..." required>
-                                </div>
+                                            <div class="absolute inset-y-0 flex  items-center  pointer-events-none">
+                                                <svg class="w-4 h-4 m-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                </svg>
+                                            </div>
+                                            <input type="search" id="searchInput1" class="block w-1/2 px-6 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Categorie..." required>
+                                        </div>
                                         <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
                                             <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-6 w-6 flex-none">
                                                     <path d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z" class="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500">
@@ -364,7 +368,7 @@ include_once 'includes/header.php';
 
 
                                             <ol class="mt-6 space-y-4" id="searchResults1">
-                                               
+
                                             </ol>
 
 
@@ -402,15 +406,15 @@ include_once 'includes/header.php';
 
 
 
-  
-    
+
+
 
     <script>
         $(document).ready(function() {
             loadAllArticles();
             $('#searchInput').on('input', function() {
                 var searchTerm = $(this).val();
-                if (searchTerm.length >= 1) { 
+                if (searchTerm.length >= 1) {
                     searchArticles(searchTerm);
                 } else {
                     loadAllArticles();
@@ -420,7 +424,7 @@ include_once 'includes/header.php';
             function searchArticles(searchTerm) {
                 $.ajax({
                     type: 'GET',
-                    url: 'includes/article.inc.php', 
+                    url: 'includes/article.inc.php',
                     data: {
                         search: searchTerm
                     },
@@ -431,7 +435,7 @@ include_once 'includes/header.php';
             }
 
             function loadAllArticles() {
-               
+
                 $.ajax({
                     type: 'GET',
                     url: 'view/articles_view.php',
@@ -443,7 +447,7 @@ include_once 'includes/header.php';
             loadAllCategories();
             $('#searchInput1').on('input', function() {
                 var searchTerm = $(this).val();
-                if (searchTerm.length >= 1) { 
+                if (searchTerm.length >= 1) {
                     searchCategories(searchTerm);
                 } else {
                     loadAllCategories();
@@ -453,7 +457,7 @@ include_once 'includes/header.php';
             function searchCategories(searchTerm) {
                 $.ajax({
                     type: 'GET',
-                    url: 'includes/categorie.inc.php', 
+                    url: 'includes/categorie.inc.php',
                     data: {
                         search: searchTerm
                     },
@@ -464,7 +468,7 @@ include_once 'includes/header.php';
             }
 
             function loadAllCategories() {
-               
+
                 $.ajax({
                     type: 'GET',
                     url: 'view/categories_view.php',

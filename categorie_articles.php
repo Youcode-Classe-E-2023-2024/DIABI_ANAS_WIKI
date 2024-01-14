@@ -10,6 +10,14 @@ require_once 'includes/dbh.inc.php';
 <?php
 require_once 'includes/header.php';
 ?>
+<head>
+    <style>
+        body{
+            background-image: url(imgs/islamic-new-year-pattern-background.jpg);
+            background-size: 100%;
+        }
+    </style>
+</head>
 
 <body class="bg-gray-100">
     <?php

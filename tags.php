@@ -17,7 +17,12 @@ if (!isset($_SESSION["user_id"])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
+<style>
+    body{
+            background-image: url(imgs/Theimage.jpg);
+            background-size: 100%;
+        }
+</style>
 </header>
 <body class="bg-gray-100">
     <?php

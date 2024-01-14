@@ -15,6 +15,11 @@ include_once 'includes/header.php';
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/f2976792f3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -37,13 +42,14 @@ include_once 'includes/header.php';
     ?>
 
     <!--! sidebar  -->
-    <div class="sider h-screen z-50 bg-white mt-14 flex-wrap w-16 border-2 fixed top-0 border-gray-300 left-0 ">
+    <div class="sider h-screen z-50 bg-gray-100 shadow-lg mt-14 flex-wrap w-16 border-2 fixed top-0  left-0 ">
         <div class="h-full w-full">
             <div class="w-full flex border-b-2 items-center h-20 p-2">
-            <img width="80" height="80" src="imgs/wiki.jpg" alt="b" />            </div>
+                <img width="80" height="80" src="imgs/wiki.jpg" alt="b" />
+            </div>
             <div class="w-full flex-col items-center py-8 justify-between flex mb-auto h-3/5 ">
 
-                <a href="nouveaute.php">
+                <a href="index.php">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/joomla.png" alt="joomla" />
                 </a>
                 <a href="articles.php">
@@ -54,13 +60,13 @@ include_once 'includes/header.php';
                 </a>
                 <?php
                 if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") { ?>
-                    <a href="dashboard.php" >
+                    <a href="dashboard.php">
                         <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/settings--v1.png" alt="settings--v1" />
                     </a>
                 <?php } ?>
                 <?php
                 if (isset($_SESSION["user_id"])) { ?>
-                    <form  action="includes\logout.inc.php" method="post">
+                    <form action="includes\logout.inc.php" method="post">
 
                         <button><img class="hover:bg-gray-200 hover:cursor-pointer w-16 p-3" width="35" height="35" src="https://img.icons8.com/ios/35/exit--v1.png" alt="exit--v1" /></button>
 
@@ -68,7 +74,7 @@ include_once 'includes/header.php';
                 <?php } ?>
                 <?php
                 if (!isset($_SESSION["user_id"])) { ?>
-                    <form  action="login_register.php" method="post">
+                    <form action="login_register.php" method="post">
 
                         <button class="mr-6"><img class="hover:bg-gray-200 ml-3 hover:cursor-pointer w-16 p-3" src="imgs/login.png" alt="exit--v1" /></button>
 
@@ -93,11 +99,11 @@ include_once 'includes/header.php';
                 <div id="Blogimage" class="hidden duration-700 bg-gray-100 ease-in-out" data-carousel-item>
                     <span class="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl ">Primer
                         Slide</span>
-                    <img class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" src="imgs/3d-illustration-smartphone-with-products-coming-out-screen-online-shopping-e-commerce-concept.jpg" alt="...">
+                    <img class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" src="imgs/3839300.jpg" alt="...">
                 </div>
 
                 <div id="Blogimage" class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" src="imgs/3839300.jpg" alt="...">
+                    <img class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" src="imgs/3d-illustration-smartphone-with-products-coming-out-screen-online-shopping-e-commerce-concept.jpg" alt="...">
                 </div>
 
                 <div id="Blogimage" class="hidden duration-700 ease-in-out" data-carousel-item>
@@ -255,22 +261,40 @@ include_once 'includes/header.php';
                 </div>
 
 
+                <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+
 
 
 
 
                 <div class="sm:px-8 mt-24 md:mt-28">
+
                     <div class="mx-auto w-full max-w-7xl lg:px-8">
+
                         <div class="relative px-4 sm:px-8 lg:px-12">
+
                             <div class="mx-auto max-w-2xl lg:max-w-5xl">
+                                <div class="relative flex mb-6 items-center">
+                                    <div class="absolute inset-y-0 flex  items-center  pointer-events-none">
+                                        <svg class="w-4 h-4 m-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="searchInput" class="block w-1/4 px-6 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Articles..." required>
+                                </div>
+
+
+
+
                                 <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+
                                     <div class="flex flex-col gap-16">
                                         <!-------------------       
                                          //    Get Articles   //
                                           ------------------->
                                         <?php
 
-                                        $Articles = get_published_articles($pdo);
                                         $latestArticles = get_latest_articles($pdo);
 
 
@@ -283,64 +307,19 @@ include_once 'includes/header.php';
                                         } else {
 
 
-                                            foreach ($latestArticles as $Article) {
+
                                         ?>
-                                                <article class="group relative flex flex-col items-start">
-                                                    <div class="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-gray-200 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-black-900/50 sm:-inset-x-6 sm:rounded-2xl"></div>
 
-                                                    <a href="#" class="relative z-10">
-                                                        <span class="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
-                                                        <span class="text-blue-800 relative z-10" id="Blogtitle"><?= $Article['title']; ?></span>
-                                                    </a>
+                                            <div id="searchResults"></div>
 
-                                                    <?php
-                                                    $auteurid = $Article['user_id'];
-                                                    $auteur = get_user_by_id($pdo, $auteurid);
-                                                    $createdAt = $Article['createdAt'];
-                                                    ?>
 
-                                                    <p class="card-subtitle mb-2 text-muted"><?= 'Auteur: ' . $auteur; ?></p>
-
-                                                    <p class="card-subtitle mb-2 text-muted">
-                                                        <?php
-                                                        $id = $Article['category_id'];
-                                                        if ($id != false) {
-                                                            $ctgrname = get_ctgr_name($pdo, $id);
-                                                            echo 'Category: ' . $ctgrname;
-                                                        } else {
-                                                            echo 'No Assigned categories';
-                                                        }
-                                                        ?>
-                                                    </p>
-
-                                                    <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5" datetime="2022-09-05">
-                                                        <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
-                                                            <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
-                                                        </span><?php convert_article_created_date($createdAt)?>
-                                                    </time>
-
-                                                    <p id="Blogcontent" class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400"><?= $Article['content']; ?>..</p>
-
-                                                    <div aria-hidden="true" class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500">
-                                                        <a href="Article_details.php?id=<?= $Article['id']; ?>&artclctgr=<?= urlencode($ctgrname); ?>&auteurid=<?= $Article['user_id']; ?>">
-                                                            <i class="fas fa-eye"></i> Read article
-                                                        </a>
-                                                        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="ml-1 h-4 w-4 stroke-current">
-                                                            <path d="M6.75 5.75 9.25 8l-2.5 2.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </div>
-                                                </article>
-
-                                            <?php
-                                            }
-
-                                            ?>
                                         <?php
                                         }
                                         ?>
                                     </div>
 
                                     <div class="space-y-10 lg:pl-16 xl:pl-24">
+
                                         <form class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40" action="/thank-you">
                                             <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-6 w-6 flex-none">
                                                     <path d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z" class="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500">
@@ -363,19 +342,19 @@ include_once 'includes/header.php';
 
                                                 foreach ($latestCategories as $category) {
                                                 ?>
-                                                                    <a class="view-articles-link flex gap-4" href="categorie_articles.php?ctgr=<?php echo $category['id']; ?>">
+                                                    <a class="view-articles-link flex gap-4" href="categorie_articles.php?ctgr=<?php echo $category['id']; ?>">
 
-                                                    <li class="flex gap-4">
-                                                        <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+                                                        <li class="flex gap-4">
+                                                            <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
 
-                                                        </div>
-                                                        <dl class="flex flex-auto flex-wrap gap-x-2">
+                                                            </div>
+                                                            <dl class="flex flex-auto flex-wrap gap-x-2">
 
-                                                            <dd class="w-full flex-none text-sm  font-medium text-black-900 ">
-                                                                <?php echo $category['name']; ?></dd>
-                                                        </dl>
-                                                    </li>
-                                                </a>
+                                                                <dd class="w-full flex-none text-sm  font-medium text-black-900 ">
+                                                                    <?php echo $category['name']; ?></dd>
+                                                            </dl>
+                                                        </li>
+                                                    </a>
                                                 <?php
                                                 }
                                                 ?>
@@ -409,11 +388,54 @@ include_once 'includes/header.php';
             </footer>
         </div>
     </div>
+    
 
 
 
 
-    <!--!FOOTER-->
+    /*
+    !Search Bar Script
+    */
+
+    <script>
+        $(document).ready(function() {
+            loadAllArticles();
+            $('#searchInput').on('input', function() {
+                var searchTerm = $(this).val();
+                if (searchTerm.length >= 1) { // adjust this threshold based on your needs
+                    searchArticles(searchTerm);
+                } else {
+                    loadAllArticles();
+                }
+            });
+
+            function searchArticles(searchTerm) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'includes/article.inc.php', // replace with the actual server-side script
+                    data: {
+                        search: searchTerm
+                    },
+                    success: function(data) {
+                        $('#searchResults').html(data);
+                    }
+                });
+            }
+
+            function loadAllArticles() {
+                // Assuming you have another AJAX request to load all articles
+                // Replace 'load_all_articles.php' with your actual server-side script
+                $.ajax({
+                    type: 'GET',
+                    url: 'view/articles_view.php',
+                    success: function(data) {
+                        $('#searchResults').html(data);
+                    }
+                });
+            }
+        });
+    </script>
+
 
 
 </body>

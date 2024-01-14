@@ -1,11 +1,11 @@
-<div class="sider h-screen z-50 bg-white mt-14 flex-wrap w-16 border-2 fixed top-0 border-gray-300 left-0 ">
+<div class="sider h-screen z-50 bg-gray-100 mt-14 flex-wrap w-16 border-2 fixed top-0  shadow-lg left-0 ">
         <div class="h-full w-full">
             <div class="w-full flex border-b-2 items-center h-20 p-2">
             <img width="80" height="80" src="imgs/wiki.jpg" alt="b" />
             </div>
             <div class="w-full flex-col items-center py-8 justify-between flex mb-auto h-3/5 ">
 
-                <a href="nouveaute.php">
+                <a href="index.php">
                     <img class="hover:bg-gray-200 hover:cursor-pointer w-full p-3" width="37" height="37" src="https://img.icons8.com/ios/37/joomla.png" alt="joomla" />
                 </a>
                 <a href="articles.php">

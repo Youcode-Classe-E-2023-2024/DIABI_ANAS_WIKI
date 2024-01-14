@@ -39,19 +39,7 @@ function get_articles_and_count(object $pdo)
 
     return ['artcls' => $artcls, 'count' => $rowCount];
 }
-function get_published_articles(object $pdo)
-{
-    $tableName = 'articles';
-    $status = 'public';
 
-    $query = "SELECT * FROM $tableName WHERE status = '$status'";
-    $stmt = $pdo->query($query);
-    $stmt->execute();
-    $artcls = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-    return $artcls;
-}
 function get_article_by_id(object $pdo, string $id)
 {
     $tableName = 'articles';
@@ -72,10 +60,7 @@ function convert_article_created_date(string $date){
     $dateTime = new DateTime($date);
 
     // Format the date as "F j, Y" (e.g., "September 5, 2022")
-    $formattedDate = $dateTime->format("F j, Y");
-    
-    // Output the formatted date
-    echo $formattedDate;
+    return $dateTime->format("F j, Y");
 
 }
 
@@ -158,17 +143,27 @@ function get_latest_categories($pdo, $limit = 3) {
 }
 
 
-function get_latest_articles($pdo, $limit = 5) {
+function get_latest_articles($pdo) {
     $query = "SELECT * FROM articles WHERE status = 'public'
-              ORDER BY createdAt DESC 
-              LIMIT :limit";
+              ORDER BY createdAt DESC";
 
     $statement = $pdo->prepare($query);
-    $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
     $statement->execute();
 
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function filter_articles_by_search($pdo, $searchTerm) {
+    $query = "SELECT * FROM articles WHERE status = 'public' AND (title LIKE :searchTerm  )
+              ORDER BY createdAt DESC";
+
+    $statement = $pdo->prepare($query);
+    $statement->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+    $statement->execute();
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 
 function get_ctgr_name(object $pdo, string $id)

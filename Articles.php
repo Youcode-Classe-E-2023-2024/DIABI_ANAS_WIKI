@@ -7,7 +7,7 @@ require_once 'includes/dbh.inc.php';
 <?php
 require_once('includes/header.php');
 if (!isset($_SESSION["user_id"])) {
-    header("location: nouveaute.php");
+    header("location: index.php");
 }
 
 ?>
@@ -383,7 +383,7 @@ if (!isset($_SESSION["user_id"])) {
         }).then((result) => {
             if (result.isConfirmed) {
                 swalWithBootstrapButtons.fire({
-                    title: "Deleted!",
+                    title: "Updated!",
                     text: "Status Changed!!.",
                     icon: "success"
                 }).then(() => {

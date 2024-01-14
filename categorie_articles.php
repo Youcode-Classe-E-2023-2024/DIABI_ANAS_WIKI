@@ -94,7 +94,7 @@ require_once 'includes/header.php';
                                 </div>
                                 <div class="btn-group mt-3" role="group">
 
-                                    <a href="Article_details.php?id=<?= $Article['id']; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
+                                    <a href="Article_details.php?id=<?= $Article['id']; ?>&auteurid=<?= $Article['user_id'] ?>" class="btn btn-primary"><i class="fas fa-eye"></i> View Details</a>
 
 
                                    

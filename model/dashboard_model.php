@@ -40,6 +40,7 @@ function get_articles_and_count(object $pdo)
     return ['artcls' => $artcls, 'count' => $rowCount];
 }
 
+
 function get_article_by_id(object $pdo, string $id)
 {
     $tableName = 'articles';
@@ -147,7 +148,8 @@ function get_latest_categories($pdo, $limit = 3)
 function get_latest_articles($pdo)
 {
     $query = "SELECT * FROM articles WHERE status = 'public'
-              ORDER BY createdAt DESC";
+              ORDER BY createdAt DESC
+              LIMIT 5";
 
     $statement = $pdo->prepare($query);
     $statement->execute();
@@ -300,11 +302,11 @@ function assign_tag(object $pdo, string $artclid, string $tagid)
         echo "Error: " . implode(" ", $stmt->errorInfo());
     }
 }
-function set_article(object $pdo, string $title, string $content, string $ctg, string $user_id)
+function set_article(object $pdo, string $title, string $content, string $ctg, string $user_id, $imgdata)
 {
 
     // SQL query with placeholders
-    $query = "INSERT INTO articles (title, content, category_id, user_id) VALUES (:title, :content, :ctg, :user_id)";
+    $query = "INSERT INTO articles (title, content, category_id, user_id, imgdata) VALUES (:title, :content, :ctg, :user_id, :imgdata)";
 
     // Prepare the SQL statement
     $stmt = $pdo->prepare($query);
@@ -314,6 +316,7 @@ function set_article(object $pdo, string $title, string $content, string $ctg, s
     $stmt->bindParam(":content", $content);
     $stmt->bindParam(":ctg", $ctg);
     $stmt->bindParam(":user_id", $user_id);
+    $stmt->bindParam(":imgdata", $imgdata);
 
     // Execute the prepared statement and handle errors
     if (!$stmt->execute()) {

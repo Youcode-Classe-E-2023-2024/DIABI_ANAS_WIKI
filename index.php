@@ -67,6 +67,8 @@ include_once 'includes/header.php';
     ?>
 
     <!--! sidebar  -->
+  
+
     <div class="sider h-screen z-50 bg-gray-100 shadow-lg mt-14 flex-wrap w-16 border-2 fixed top-0  left-0 ">
         <div class="h-full w-full">
             <div class="w-full flex border-b-2 items-center h-20 p-2">
@@ -110,8 +112,6 @@ include_once 'includes/header.php';
         </div>
 
     </div>
-
-
 
 
     <!--!Carousell-->
@@ -251,31 +251,47 @@ include_once 'includes/header.php';
                     </div>
                 </div>
                 <div class="mt-16 sm:mt-20">
+
+<?php                   $artclimg = [];
+                        $articles = get_latest_articles($pdo);
+                        
+                            $artclimg[0] = $articles[0]['imgdata'];
+                            $artclimg[1] = $articles[1]['imgdata'];
+                            $artclimg[2] = $articles[2]['imgdata'];
+                            $artclimg[3] = $articles[3]['imgdata'];
+                            $artclimg[4] = $articles[4]['imgdata'];
+                            
+
+                        
+
+                        
+
+                        ?>
                     <div class="-my-4 flex  justify-center gap-5 overflow-hidden py-4 sm:gap-8">
                         <div class="relative blog blog1 aspect-[9/10] w-44 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl rotate-2 h-48">
                             <a href="#" class="block  w-full h-full group">
-                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class=" absolute  inset-0 h-full  object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/3839300.jpg">
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($artclimg[0]); ?>" alt="Article Image" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" id="bolg1">
                             </a>
                         </div>
                         <div class="relative blog blog2 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl -rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
-                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/4347955.jpg" i>
+                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="data:image/jpeg;base64,<?php echo base64_encode($artclimg[1]); ?>" id="bolg2">
                             </a>
                         </div>
 
                         <div class="relative blog blog3 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
-                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/blog-outline-640x320.webp" id="blog3">
+                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="data:image/jpeg;base64,<?php echo base64_encode($artclimg[2]); ?>" id="blog3">
                             </a>
                         </div>
                         <div class="relative blog blog4 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
-                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/shop_laptop_w.jpg" id="blog4">
+                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="data:image/jpeg;base64,<?php echo base64_encode($artclimg[3]); ?>" id="blog4">
                             </a>
                         </div>
                         <div class="relative blog blog5 aspect-[9/10] w-4 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl -rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
-                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/Blogging.png" id="blog5">
+                                <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="data:image/jpeg;base64,<?php echo base64_encode($artclimg[4]); ?>" id="blog5">
                             </a>
                         </div>
                     </div>
@@ -316,8 +332,8 @@ include_once 'includes/header.php';
                                           ------------------->
                                         <?php
 
-                                        $latestArticles = get_latest_articles($pdo);
-
+                                        $latestArticlesData = get_articles_and_count($pdo);
+                                        $latestArticles = $latestArticlesData;
 
 
                                         if (count($latestArticles) === 0) {

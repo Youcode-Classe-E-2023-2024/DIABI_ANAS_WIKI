@@ -137,7 +137,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="includes/article.inc.php" method="POST">
+                    <form action="includes/article.inc.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="tagName">Article title:</label>
                             <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
@@ -146,6 +146,10 @@
                             <label for="tagName">Article content:</label>
                             <textarea name="content" class="form-control" id="content" placeholder="Enter content"></textarea>
                             <input type="hidden" name="user_id" class="form-control" id="user_id" value="<?= $_SESSION["user_id"] ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Select Image:</label>
+                            <input type="file" class="form-control-file" name="imgdata" id="image" accept="image/*">
                         </div>
                         <div class="container mt-5">
                             <h2>Select a Category</h2>

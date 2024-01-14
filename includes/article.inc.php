@@ -8,12 +8,14 @@ if (isset($_POST["submit"])) {
     $content = $_POST['content'];
     $ctg = $_POST['selectedCategoryId'];
     $user_id = $_POST['user_id'];
+    $imgData = file_get_contents($_FILES["imgdata"]["tmp_name"]);
+
 
     try {
 
 
 
-        set_article($pdo, $title, $content, $ctg, $user_id);
+        set_article($pdo, $title, $content, $ctg, $user_id, $imgData);
         header("location: ../articles.php?add_article=success");
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());

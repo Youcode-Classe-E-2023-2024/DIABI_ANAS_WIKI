@@ -58,12 +58,20 @@ require_once('includes/header.php');
     $auteur = get_user_by_id($pdo, $auteurid);
 
     $Article = get_article_by_id($pdo, $id);
-
+    $imgData = get_article_by_id($pdo, $id);
 
     ?>
     <div class="container mt-44">
         <div class="card">
-            <img src="article_image.jpg" class="card-img-top" alt="Article Image">
+            <?php
+            if ($imgData) {
+                // Display the retrieved image using a data URI
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($imgData['imgdata']) . '" class="img-fluid m-auto" alt="Article Image" style="width:50%">';
+            } else {
+                echo '<img src="imgs/imgerror.png" class="img-fluid" alt="Article ....Image" style="width:50%">';
+            }
+            ?>
+            
             <div class="card-body">
                 <h2 class="card-title"><?= $Article['title']; ?></h2>
                 <p class="card-text"><?= $Article['content']; ?></p>

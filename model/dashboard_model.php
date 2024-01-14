@@ -43,37 +43,37 @@ function get_articles_and_count(object $pdo)
 function get_article_by_id(object $pdo, string $id)
 {
     $tableName = 'articles';
-    
+
     // Prepare and execute the query
     $query = "SELECT * FROM $tableName WHERE id = :id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    
+
     // Fetch the result as an associative array
     $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $article;
 }
-function convert_article_created_date(string $date){
+function convert_article_created_date(string $date)
+{
 
     $dateTime = new DateTime($date);
 
     // Format the date as "F j, Y" (e.g., "September 5, 2022")
     return $dateTime->format("F j, Y");
-
 }
 
 function get_user_by_id(object $pdo, string $id)
 {
     $tableName = 'users';
-    
+
     // Prepare and execute the query
     $query = "SELECT username FROM $tableName WHERE id = :id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    
+
     // Fetch the result as an associative array
     $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -82,13 +82,13 @@ function get_user_by_id(object $pdo, string $id)
 function get_article_by_categorie(object $pdo, string $ctgr)
 {
     $tableName = 'articles';
-    
+
     // Prepare and execute the query
     $query = "SELECT * FROM $tableName WHERE category_id = :ctgr";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":ctgr", $ctgr);
     $stmt->execute();
-    
+
     // Fetch the result as an associative array
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -130,7 +130,8 @@ function get_categories_and_count(object $pdo)
 }
 
 
-function get_latest_categories($pdo, $limit = 3) {
+function get_latest_categories($pdo, $limit = 3)
+{
     $query = "SELECT * FROM categories 
               ORDER BY created_at DESC 
               LIMIT :limit";
@@ -143,7 +144,8 @@ function get_latest_categories($pdo, $limit = 3) {
 }
 
 
-function get_latest_articles($pdo) {
+function get_latest_articles($pdo)
+{
     $query = "SELECT * FROM articles WHERE status = 'public'
               ORDER BY createdAt DESC";
 
@@ -153,9 +155,22 @@ function get_latest_articles($pdo) {
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function filter_articles_by_search($pdo, $searchTerm) {
+function filter_articles_by_search($pdo, $searchTerm)
+{
     $query = "SELECT * FROM articles WHERE status = 'public' AND (title LIKE :searchTerm  )
               ORDER BY createdAt DESC";
+
+    $statement = $pdo->prepare($query);
+    $statement->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+    $statement->execute();
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+function filter_categorie_by_search($pdo, $searchTerm)
+{
+
+    $query = "SELECT * FROM categories WHERE  (name LIKE :searchTerm  )";
+              
 
     $statement = $pdo->prepare($query);
     $statement->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
@@ -175,12 +190,12 @@ function get_ctgr_name(object $pdo, string $id)
     $stmt->execute();
 
     $ctgrname = $stmt->fetch(PDO::FETCH_ASSOC);
-    if(empty($ctgrname)) {
+    if (empty($ctgrname)) {
         return false;
-    }else{
+    } else {
 
-    return $ctgrname['name'];
-}
+        return $ctgrname['name'];
+    }
 }
 
 function get_ctgr_id(object $pdo, string $name)
@@ -207,7 +222,6 @@ function get_article_tag(object $pdo, string $id)
     $tagIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
     return $tagIds;
-    
 }
 
 function get_tag_id(object $pdo, string $name)
@@ -231,12 +245,12 @@ function get_tag_name_by_id(object $pdo, string $id)
     $stmt->execute();
 
     $tagname = $stmt->fetch(PDO::FETCH_ASSOC);
-    if(empty($tagname)) {
+    if (empty($tagname)) {
         return false;
-    }else{
+    } else {
 
-    return $tagname['name'];
-}
+        return $tagname['name'];
+    }
 }
 
 
@@ -265,7 +279,8 @@ function set_tag(object $pdo, string $name)
 }
 
 
-function assign_tag(object $pdo, string $artclid, string $tagid){
+function assign_tag(object $pdo, string $artclid, string $tagid)
+{
 
 
     $query = "INSERT INTO article_tags (article_id, tag_id) VALUES (:article_id, :tag_id)";
@@ -284,7 +299,6 @@ function assign_tag(object $pdo, string $artclid, string $tagid){
         // Handle the error, e.g., log it or show a user-friendly message
         echo "Error: " . implode(" ", $stmt->errorInfo());
     }
-
 }
 function set_article(object $pdo, string $title, string $content, string $ctg, string $user_id)
 {
@@ -387,6 +401,3 @@ function toggleArticleStatus($pdo, $id, $newStatus)
 
     header("location: ../Articles.php");
 }
-
-
-

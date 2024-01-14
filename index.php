@@ -34,8 +34,21 @@ include_once 'includes/header.php';
             /* Number of lines to show */
         }
         #searchInput{
-            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;        
-         }
+
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            transition:ease-in-out 0.3s;
+        }
+        #searchInput:hover{
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        
+        
+        
+        }
+        .blog:hover{
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transition:ease-in-out 0.3s;
+        }
 
         body {
             background-image: url(imgs/Cover-1.png);
@@ -235,28 +248,28 @@ include_once 'includes/header.php';
                 </div>
                 <div class="mt-16 sm:mt-20">
                     <div class="-my-4 flex  justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-                        <div class="relative blog1 aspect-[9/10] w-44 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl rotate-2 h-48">
+                        <div class="relative blog blog1 aspect-[9/10] w-44 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl rotate-2 h-48">
                             <a href="#" class="block  w-full h-full group">
                                 <img alt="" loading="lazy" decoding="async" data-nimg="1" class=" absolute  inset-0 h-full  object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/3839300.jpg">
                             </a>
                         </div>
-                        <div class="relative blog2 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl -rotate-2 h-48">
+                        <div class="relative blog blog2 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl -rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
                                 <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/4347955.jpg" i>
                             </a>
                         </div>
 
-                        <div class="relative blog3 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl rotate-2 h-48">
+                        <div class="relative blog blog3 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
                                 <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/blog-outline-640x320.webp" id="blog3">
                             </a>
                         </div>
-                        <div class="relative blog4 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl rotate-2 h-48">
+                        <div class="relative blog blog4 aspect-[9/10] w-4 shadow-lg flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
                                 <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/shop_laptop_w.jpg" id="blog4">
                             </a>
                         </div>
-                        <div class="relative blog5 aspect-[9/10] w-4 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl -rotate-2 h-48">
+                        <div class="relative blog blog5 aspect-[9/10] w-4 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-64 sm:rounded-2xl -rotate-2 h-48">
                             <a href="#" class="block w-full h-full group">
                                 <img alt="" loading="lazy" decoding="async" data-nimg="1" class="absolute inset-0 h-full w-full object-cover transition-transform transform-gpu duration-300 group-hover:scale-105" style="color:transparent" sizes="(min-width: 240px) 18rem, 11rem" src="imgs/Blogging.png" id="blog5">
                             </a>
@@ -334,35 +347,27 @@ include_once 'includes/header.php';
                                                 publish something new, and unsubscribe at any time.</p>
                                             <div class="mt-6 flex"><input type="email" placeholder="Email address" aria-label="Email address" required="" class="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"><button class="inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70 ml-4 flex-none" type="submit">Join</button></div>
                                         </form>
+                                        <div class="relative flex mb-6  items-center">
+                                    <div class="absolute inset-y-0 flex  items-center  pointer-events-none">
+                                        <svg class="w-4 h-4 m-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="searchInput1" class="block w-1/2 px-6 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Categorie..." required>
+                                </div>
                                         <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
                                             <h2 class="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-6 w-6 flex-none">
                                                     <path d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z" class="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500">
                                                     </path>
                                                     <path d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5" class="stroke-zinc-400 dark:stroke-zinc-500"></path>
                                                 </svg><span class="ml-3 text-black">Categories</span></h2>
-                                            <ol class="mt-6 space-y-4">
-                                                <?php
-                                                $latestCategories = get_latest_categories($pdo, 3);
 
-                                                foreach ($latestCategories as $category) {
-                                                ?>
-                                                    <a class="view-articles-link flex gap-4" href="categorie_articles.php?ctgr=<?php echo $category['id']; ?>">
 
-                                                        <li class="flex gap-4">
-                                                            <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-
-                                                            </div>
-                                                            <dl class="flex flex-auto flex-wrap gap-x-2">
-
-                                                                <dd class="w-full flex-none text-sm  font-medium text-black-900 ">
-                                                                    <?php echo $category['name']; ?></dd>
-                                                            </dl>
-                                                        </li>
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?>
+                                            <ol class="mt-6 space-y-4" id="searchResults1">
+                                               
                                             </ol>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -432,6 +437,39 @@ include_once 'includes/header.php';
                     url: 'view/articles_view.php',
                     success: function(data) {
                         $('#searchResults').html(data);
+                    }
+                });
+            }
+            loadAllCategories();
+            $('#searchInput1').on('input', function() {
+                var searchTerm = $(this).val();
+                if (searchTerm.length >= 1) { 
+                    searchCategories(searchTerm);
+                } else {
+                    loadAllCategories();
+                }
+            });
+
+            function searchCategories(searchTerm) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'includes/categorie.inc.php', 
+                    data: {
+                        search: searchTerm
+                    },
+                    success: function(data) {
+                        $('#searchResults1').html(data);
+                    }
+                });
+            }
+
+            function loadAllCategories() {
+               
+                $.ajax({
+                    type: 'GET',
+                    url: 'view/categories_view.php',
+                    success: function(data) {
+                        $('#searchResults1').html(data);
                     }
                 });
             }

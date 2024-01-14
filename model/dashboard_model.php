@@ -174,9 +174,13 @@ function get_ctgr_name(object $pdo, string $id)
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
-    $ctgname = $stmt->fetch(PDO::FETCH_ASSOC);
+    $ctgrname = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(empty($ctgrname)) {
+        return false;
+    }else{
 
-    return $ctgname['name'];
+    return $ctgrname['name'];
+}
 }
 
 function get_ctgr_id(object $pdo, string $name)

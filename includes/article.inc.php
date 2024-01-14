@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
     header("location: ../articles.php?update_article=success");
     exit();
 }
-if (isset($_GET['search'])) {
+if (isset($_GET['search'])) {   
 
     $searchTerm = $_GET['search'];
 
@@ -83,7 +83,10 @@ if (isset($_GET['search'])) {
                         <path d="M6.75 5.75 9.25 8l-2.5 2.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </div>
-            </article>';
+                
+            </article>
+            <hr style="margin-bottom: 30px;">
+            ';
         }
     }
 }

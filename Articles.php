@@ -41,7 +41,7 @@ if (!isset($_SESSION["user_id"])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-dfJvW1RlZj5FpxJ3z9+uL4P6blgM5ZPaUwT4uFR16n1UvA6HgPQ9CExlJEPi2Jmw" crossorigin="anonymous">
     <style>
         body{
-            background-image: url(imgs/Theimage.jpg);
+            background-image: url(imgs/Cover-1.png);
             background-size: 100%;
         }
         .carded {
@@ -105,7 +105,7 @@ if (!isset($_SESSION["user_id"])) {
 
                                 <div class="<?= ($Article['status'] === 'archived') ? 'text-muted ' : ''; ?>card-body">
 
-                                    <h5 class="card-title inline"><?= 'Title: ' . $Article['title']; ?></h5>
+                                    <h5 class="card-title inline"><?= 'Title: <br>' . $Article['title']; ?></h5>
 
                                     <div class="dropdown mt-3 inline">
                                         <button class="btn btn-warning dropdown-toggle" style="margin-left: 80px;" type="button" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -138,11 +138,12 @@ if (!isset($_SESSION["user_id"])) {
                                                                                 $id = $Article['category_id'];
                                                                                 if ($id != false) {
                                                                                     $ctgrname = get_ctgr_name($pdo, $id);
-
+                                                                                    if($ctgrname != false){
                                                                                     echo 'Category: ' . $ctgrname;
                                                                                 } else {
                                                                                     echo 'No Assigned categories';
                                                                                 }
+                                                                            }
                                                                                 ?></p>
                                     <p class="card-subtitle mb-2 text-muted"><?php
                                                                                 $id = $Article['id'];

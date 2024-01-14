@@ -33,6 +33,14 @@ include_once 'includes/header.php';
             -webkit-line-clamp: 5;
             /* Number of lines to show */
         }
+        #searchInput{
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;        
+         }
+
+        body {
+            background-image: url(imgs/Cover-1.png);
+            background-size: 100%;
+        }
     </style>
 </head>
 
@@ -147,13 +155,9 @@ include_once 'includes/header.php';
 
     <!--************************************-->
 
-    <div class="flex w-full bg-gray-100">
-        <div class="fixed inset-0 flex justify-center sm:px-8">
-            <div class="flex w-full max-w-7xl lg:px-8">
-                <div class="w-full  "></div>
-            </div>
-        </div>
-        <div class="relative flex w-full bg-gray-100 flex-col">
+    <div class="flex w-full mt-6">
+        
+    <div class="relative flex w-full bg-gray-100  flex-col">
             <header class="pointer-events-none relative z-50 flex flex-none flex-col" style="height:var(--header-height);margin-bottom:var(--header-mb)">
                 <div class="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"></div>
                 <div class="sm:px-8 top-0 order-last -mb-3 pt-3" style="position:var(--header-position)">
@@ -275,7 +279,7 @@ include_once 'includes/header.php';
                         <div class="relative px-4 sm:px-8 lg:px-12">
 
                             <div class="mx-auto max-w-2xl lg:max-w-5xl">
-                                <div class="relative flex mb-6 items-center">
+                                <div class="relative flex mb-6  items-center">
                                     <div class="absolute inset-y-0 flex  items-center  pointer-events-none">
                                         <svg class="w-4 h-4 m-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -388,21 +392,20 @@ include_once 'includes/header.php';
             </footer>
         </div>
     </div>
+
+
+
+
+
+  
     
-
-
-
-
-    /*
-    !Search Bar Script
-    */
 
     <script>
         $(document).ready(function() {
             loadAllArticles();
             $('#searchInput').on('input', function() {
                 var searchTerm = $(this).val();
-                if (searchTerm.length >= 1) { // adjust this threshold based on your needs
+                if (searchTerm.length >= 1) { 
                     searchArticles(searchTerm);
                 } else {
                     loadAllArticles();
@@ -412,7 +415,7 @@ include_once 'includes/header.php';
             function searchArticles(searchTerm) {
                 $.ajax({
                     type: 'GET',
-                    url: 'includes/article.inc.php', // replace with the actual server-side script
+                    url: 'includes/article.inc.php', 
                     data: {
                         search: searchTerm
                     },
@@ -423,8 +426,7 @@ include_once 'includes/header.php';
             }
 
             function loadAllArticles() {
-                // Assuming you have another AJAX request to load all articles
-                // Replace 'load_all_articles.php' with your actual server-side script
+               
                 $.ajax({
                     type: 'GET',
                     url: 'view/articles_view.php',

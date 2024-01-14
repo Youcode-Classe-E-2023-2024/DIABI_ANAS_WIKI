@@ -10,7 +10,7 @@ $Articles = get_latest_articles($pdo);
 
 foreach ($Articles as $Article) {
     echo '
-    <article class="group relative flex flex-col items-start">
+    <article class="group relative flex flex-col items-start" style="margin-bottom: 30px;">
         <div class="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-gray-200 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-black-900/50 sm:-inset-x-6 sm:rounded-2xl"></div>
 
         <a href="#" class="relative z-10">
@@ -37,7 +37,7 @@ foreach ($Articles as $Article) {
 
     echo '
         </p>
-        <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5" datetime="2022-09-05">
+        <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5" datetime="2022-09-05" >
             <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
                 <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
             </span>' .  $formattedDate . '
@@ -51,5 +51,6 @@ foreach ($Articles as $Article) {
                 <path d="M6.75 5.75 9.25 8l-2.5 2.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
         </div>
-    </article>';
+    </article>
+    <hr style="margin-bottom: 30px;">';
 }

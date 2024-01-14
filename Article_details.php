@@ -16,6 +16,16 @@ require_once('includes/header.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Article Display</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/f2976792f3.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -57,7 +67,9 @@ require_once('includes/header.php');
             <div class="card-body">
                 <h2 class="card-title"><?= $Article['title']; ?></h2>
                 <p class="card-text"><?= $Article['content']; ?></p>
+                <hr class="m-2">
                 <div class="row">
+                
                     <div class="col-md-6">
                         <p class="card-text"><i class="fas fa-folder"></i> <strong>Category:</strong> <?= $artclctgr; ?></p>
                     </div>
@@ -66,7 +78,7 @@ require_once('includes/header.php');
                     </div>
                 </div>
 
-                <hr>
+                
 
                 <?php
                 $tagIds = get_article_tag($pdo, $id);
@@ -80,7 +92,7 @@ require_once('includes/header.php');
                 }
                 ?>
 
-                <div class="row inline flex">
+                <div class="row inline mt-6 flex">
                     <div class="col-md-6">
                         <p class="card-subtitle text-muted">
                             <?php if (!empty($tags)) : ?>
@@ -95,14 +107,15 @@ require_once('includes/header.php');
                     </div>
 
                     <div class="col-md-6">
-                        <time class="relative inline z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5" datetime="2022-09-05">
+
+                        <time class="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5" datetime="2022-09-05">
                             <span class="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
                                 <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
-                            </span>
-                            <?php
-                            $createdAt = $Article['createdAt'];
-                            convert_article_created_date($createdAt)
-                            ?>
+                            </span><?php
+                                    $createdAt = $Article['createdAt'];
+                                    $cnvrtddate = convert_article_created_date($createdAt);
+                                    echo $cnvrtddate;
+                                    ?>
                         </time>
                     </div>
                 </div>
